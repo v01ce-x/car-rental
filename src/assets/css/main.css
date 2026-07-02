@@ -8,7 +8,7 @@
 
   /* Border color */
   --color-hard: #0b0b0b;
-  --color-input: #fbfbfb;
+  --color-input: #b7b7b7;
 
   /* Text color */
   --color-primary-foreground: #fbfbfb;
@@ -21,5 +21,10 @@
 }
 
 html {
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Nunito', sans-serif !important;
+}
+
+input {
+  outline: none;
+  border: none;
 }
