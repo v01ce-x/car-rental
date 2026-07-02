@@ -1,0 +1,19 @@
+@import 'tailwindcss';
+
+@theme {
+    /* Button background */
+    --color-button-primary: #0B0B0B;
+    --color-button-secondary: #F5F5F5;
+
+    /* Border color */
+    --color-hard: #0B0B0B;
+    --color-input: #FBFBFB;
+
+    /* Text color */
+    --color-primary-foreground: #0B0B0B;
+    --color-secondary-foreground: #0B0B0B;
+    --color-secondary: #969696;
+
+    /* Blue scale */
+    --blue-600: #2563EB;
+}
