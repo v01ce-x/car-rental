@@ -1,19 +1,25 @@
 @import 'tailwindcss';
+@import './fonts.css';
 
 @theme {
-    /* Button background */
-    --color-button-primary: #0B0B0B;
-    --color-button-secondary: #F5F5F5;
+  /* Button background */
+  --color-button-primary: #0b0b0b;
+  --color-button-secondary: #f5f5f5;
 
-    /* Border color */
-    --color-hard: #0B0B0B;
-    --color-input: #FBFBFB;
+  /* Border color */
+  --color-hard: #0b0b0b;
+  --color-input: #fbfbfb;
 
-    /* Text color */
-    --color-primary-foreground: #0B0B0B;
-    --color-secondary-foreground: #0B0B0B;
-    --color-secondary: #969696;
+  /* Text color */
+  --color-primary-foreground: #fbfbfb;
+  --color-foreground: #0b0b0b;
+  --color-surface: #0b0b0b;
+  --color-secondary: #969696;
 
-    /* Blue scale */
-    --blue-600: #2563EB;
+  /* Blue scale */
+  --blue-600: #2563eb;
+}
+
+html {
+  font-family: 'Nunito', sans-serif;
 }
