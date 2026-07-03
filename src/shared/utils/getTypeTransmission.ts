@@ -4,7 +4,7 @@ export const getTypeTransmission = (transmission: string) => {
       return 'Автомат';
 
     case 'manual':
-      return 'Инструкция';
+      return 'Механика';
 
     default:
       return transmission;

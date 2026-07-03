@@ -2,9 +2,10 @@
 @import 'tailwindcss';
 
 @theme {
-  /* Button background */
+  /* background */
   --color-button-primary: #0b0b0b;
   --color-button-secondary: #f5f5f5;
+  --color-muted: #f3f3f3;
 
   /* Border color */
   --color-hard: #0b0b0b;
@@ -19,6 +20,8 @@
 
   /* Blue scale */
   --blue-600: #2563eb;
+
+  --color-outline: rgb(0 0 0 / 0.3);
 
   /* Fonts */
   --font-sans: 'Nunito', sans-serif;

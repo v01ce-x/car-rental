@@ -3,12 +3,15 @@ import { AppButton } from '@/shared/ui';
 import type { Car } from '@/entities';
 import { computed } from 'vue';
 import { getTypeTransmission, imageAdapter } from '@/shared/utils';
+import { ProductCardVariants } from '../lib/product-card.variants.ts';
 
 interface Props {
   car: Car;
 }
 
 const props = defineProps<Props>();
+
+const { image, context } = ProductCardVariants();
 
 const coverImage = computed(() => {
   return props.car.media.filter((media) => media.isCover)[0].url;
@@ -17,9 +20,9 @@ const coverImage = computed(() => {
 
 <template>
   <article class="flex flex-col gap-y-2">
-    <img :src="imageAdapter(coverImage)" alt="" class="aspect-video" />
+    <img :src="imageAdapter(coverImage)" alt="" :class="image()" />
 
-    <div class="flex flex-col gap-y-2 font-medium">
+    <div :class="context()">
       <div class="flex flex-col">
         <h3 class="text-foreground">{{ car.name }}</h3>
         <h4 class="text-surface text-[14px]">{{ getTypeTransmission(car.transmission) }}</h4>

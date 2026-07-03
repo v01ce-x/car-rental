@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { SearchBar } from '@/features/home';
-import { ProductGrid } from '@/widgets/home';
+import { FilterBar, ProductGrid } from '@/widgets/home';
 </script>
 
 <template>
@@ -8,6 +8,10 @@ import { ProductGrid } from '@/widgets/home';
     <search-bar />
 
     <product-grid />
+    <teleport to="#screen">
+      <filter-bar />
+    </teleport>
+    <filter-bar />
   </div>
 </template>
 
