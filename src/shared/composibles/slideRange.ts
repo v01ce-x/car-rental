@@ -22,9 +22,7 @@ export const slideRange = (
         if (getPeerX && pos.x < getPeerX()) {
           pos.x = getPeerX();
         }
-      }
-
-      else {
+      } else {
         if (getPeerX && pos.x > getPeerX()) {
           pos.x = getPeerX();
         }

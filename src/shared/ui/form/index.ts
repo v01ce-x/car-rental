@@ -5,3 +5,4 @@ export { default as FormSelect } from './FormSelect.vue';
 export { default as FormSegment } from './FormSegment.vue';
 export { default as FormPrice } from './FormPrice.vue';
 export { default as FormRange } from './FormRange.vue';
+export { default as FormColor } from './FormColor.vue';

@@ -13,19 +13,19 @@ const sliderContainer = ref<HTMLElement | null>(null);
 const { width } = useElementBounding(sliderContainer);
 
 const { style: styleMinPrice, position: positionMinPrice } = slideRange(
-    minPrice,
-    sliderContainer,
-    width,
-    false,
-    () => positionMaxPrice.value.x
+  minPrice,
+  sliderContainer,
+  width,
+  false,
+  () => positionMaxPrice.value.x
 );
 
 const { style: styleMaxPrice, position: positionMaxPrice } = slideRange(
-    maxPrice,
-    sliderContainer,
-    width,
-    true,
-    () => positionMinPrice.value.x
+  maxPrice,
+  sliderContainer,
+  width,
+  true,
+  () => positionMinPrice.value.x
 );
 
 const activeTrackStyle = computed(() => {
@@ -44,17 +44,17 @@ const activeTrackStyle = computed(() => {
     <div class="bg-blue-600 h-1.5 absolute rounded-full" :style="activeTrackStyle" />
 
     <div
-        ref="minPrice"
-        :class="rangeSlider()"
-        :style="styleMinPrice"
-        class="-translate-x-1/2 touch-none absolute z-20"
+      ref="minPrice"
+      :class="rangeSlider()"
+      :style="styleMinPrice"
+      class="-translate-x-1/2 touch-none absolute z-20"
     />
 
     <div
-        ref="maxPrice"
-        :class="rangeSlider()"
-        :style="styleMaxPrice"
-        class="-translate-x-1/2 touch-none absolute z-20"
+      ref="maxPrice"
+      :class="rangeSlider()"
+      :style="styleMaxPrice"
+      class="-translate-x-1/2 touch-none absolute z-20"
     />
   </div>
 </template>
