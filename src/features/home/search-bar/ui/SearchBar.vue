@@ -8,6 +8,10 @@ const startDate = ref<number>(Date.now());
 const endDate = ref<number>(Date.now());
 
 const { dateSearch, center } = SearchBarVariants();
+
+const emit = defineEmits<{
+  (e: 'switchFlag'): void;
+}>();
 </script>
 
 <template>
@@ -29,7 +33,7 @@ const { dateSearch, center } = SearchBarVariants();
 
     <div :class="center()">
       <app-button variant="primary">Найти машину</app-button>
-      <div class="p-4 cursor-pointer">
+      <div class="p-4 cursor-pointer" @click="() => emit('switchFlag')">
         <app-icon name="list-filter" class="w-5 h-5" />
       </div>
     </div>

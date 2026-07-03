@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { AppIcon, CircleButton } from '@/shared/ui';
-import { NAVIGATION_BUTTONS } from '@/entities';
+import { NAVIGATION_BUTTONS } from '@/entities/navigation';
 </script>
 
 <template>

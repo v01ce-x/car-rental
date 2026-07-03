@@ -11,7 +11,7 @@ import { FormField, FormInput, FormRange } from '@/shared/ui';
         <form-input placeholder="0 руб" />
       </form-field>
       <form-field label="до" class="max-w-51.5">
-        <form-input placeholder="20 000 руб" />
+        <form-input placeholder="100 000 руб" />
       </form-field>
     </div>
 
