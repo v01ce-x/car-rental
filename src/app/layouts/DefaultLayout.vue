@@ -1,7 +1,13 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import AppHeader from '@/widgets/layout/ui/AppHeader.vue';
+</script>
 
 <template>
-  <main></main>
+  <div id="screen" class="max-w-300 w-full mx-auto my-16">
+    <app-header />
+
+    <main class="my-4"><slot /></main>
+  </div>
 </template>
 
 <style scoped></style>

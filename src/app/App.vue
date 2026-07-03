@@ -1,3 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { DefaultLayout } from '@/app/layouts';
+</script>
 
-<template></template>
+<template>
+  <default-layout>
+    <router-view />
+  </default-layout>
+</template>
