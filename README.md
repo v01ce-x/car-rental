@@ -1,5 +1,84 @@
-# Vue 3 + TypeScript + Vite
+# 🚗 Car Rental
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Фронтенд-приложение для сервиса аренды автомобилей, построенное на современном стеке **Vue 3 (Composition API)** и **Vite 8**. Проект использует компонентный подход, строгую типизацию TypeScript и новейшие практики экосистемы Vue.
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+---
+
+## 🛠 Стек технологий
+
+*   **Фреймворк:** [Vue 3](https://vuejs.org) (Script Setup, `defineModel`, Композиблы)
+*   **Сборщик:** [Vite 8](https://vitejs.dev) — сверхбыстрая сборка и Hot Module Replacement (HMR)
+*   **Стилизация:** [Tailwind CSS v4](https://tailwindcss.com) (с официальным плагином `@tailwindcss/vite`) + [Tailwind Variants](https://tailwind-variants.org) для гибкой стилизации UI-компонентов и утилит [Tailwind Merge](https://github.com).
+*   **Управление состоянием и кэширование:** [Pinia](https://vuejs.org) + [Pinia Colada](https://esm.is) (современный инструмент для синхронизации состояния с сервером и кэширования асинхронных данных / аналог TanStack Query).
+*   **Роутинг:** [Vue Router 5](https://vuejs.org)
+*   **Работа с формами и валидация:** [Vee-Validate 4](https://logaretm.com) в связке с [Zod](https://zod.dev) (`@vee-validate/zod`) для типобезопасной валидации схем.
+*   **HTTP-клиент:** [Axios](https://axios-http.com)
+*   **Типизация:** [TypeScript 6](https://typescriptlang.org) + `vue-tsc` для статического анализа шаблонов.
+*   **Линтинг и форматирование:** Кастомные конфигурации `@siberiacancode/eslint` и `@siberiacancode/prettier`.
+
+---
+
+## 🚀 Быстрый старт
+
+### 1. Установка зависимостей
+
+Убедитесь, что у вас установлен Node.js, затем выполните:
+
+```bash
+npm install
+```
+
+### 2. Запуск в режиме разработки
+
+Запуск локального сервера разработки с поддержкой Vite HMR:
+
+```bash
+npm run dev
+```
+После запуска проект будет доступен по адресу, указанному в консоли (обычно `http://localhost:5173`).
+
+### 3. Проверка типов и сборка для продакшна
+
+Команда проверяет типы TypeScript во всех `.ts` и `.vue` файлах с помощью `vue-tsc`, а затем собирает оптимизированный production-билд через Vite:
+
+```bash
+npm run build
+```
+
+Результат сборки будет находиться в директории `dist/`.
+
+### 4. Предпросмотр продакшн-сборки
+
+Запустить локальный сервер для проверки собранного продакшн-билда:
+
+```bash
+npm run preview
+```
+
+### 5. Форматирование кода
+
+Автоматическое выравнивание и форматирование всех файлов в папке `src/` с использованием Prettier:
+
+```bash
+npm run format
+```
+
+---
+
+## 📂 Структура проекта (Рекомендуемая / Используемая)
+
+Проект ориентирован на масштабируемую архитектуру (Feature-Driven / Layered):
+
+```text
+src/
+├── app/              # Инициализация приложения (провайдеры, стили, роутер)
+├── entities/         # Бизнес-сущности (например, filter, car, user)
+├── features/         # Взаимодействие пользователя с бизнес-логикой
+├── shared/           # Переиспользуемые утилиты, ui-компоненты, композиблы
+│   ├── composibles/  # Кастомные Vue-композиблы (например, slideRange)
+│   └── ui/           # Базовые UI элементы (AppButton, AppIcon, FormInput и др.)
+├── widgets/          # Крупные самостоятельные блоки (например, FilterBar, SearchBar)
+└── main.ts           # Точка входа в приложение
+```
+
+---
