@@ -6,17 +6,28 @@ export const slideRange = (
   container: Ref<HTMLElement | null>,
   width: Ref<number>,
   isEndPosition: boolean = false,
+  getPeerX?: () => number
 ) => {
   const { style, position } = useDraggable(marker, {
     initialValue: { x: 0, y: 3 },
-
     containerElement: container,
 
     onMove(pos) {
       pos.y = 3;
 
-      if (isEndPosition && pos.x >= width.value - 16) {
-        pos.x = width.value;
+      if (isEndPosition) {
+        if (pos.x >= width.value - 16) {
+          pos.x = width.value;
+        }
+        if (getPeerX && pos.x < getPeerX()) {
+          pos.x = getPeerX();
+        }
+      }
+
+      else {
+        if (getPeerX && pos.x > getPeerX()) {
+          pos.x = getPeerX();
+        }
       }
     }
   });
