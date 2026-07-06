@@ -8,7 +8,7 @@ import { Routes } from '@/shared/lib';
 import { AppButton } from '@/shared/ui';
 import { imageAdapter, translations } from '@/shared/utils';
 
-import { CarCardVariants } from '../lib/car-card.variants.ts';
+import { CarCardVariants } from './car-card.variants.ts';
 
 interface Props {
   car: Car;

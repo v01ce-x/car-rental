@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
-import type { SteeringType, TransmissionType } from '@/entities';
+import type { SteeringType, TransmissionType } from '@/entities/car';
 
 interface Props {
   items: SteeringType[] | TransmissionType[];

@@ -3,8 +3,8 @@ import { computed, ref } from 'vue';
 
 import type { CarMedia } from '@/entities/car';
 
-import { imageAdapter } from '@/shared/utils';
 import { AppIcon, AppSliderButton } from '@/shared/ui';
+import { imageAdapter } from '@/shared/utils';
 
 interface Props {
   media: CarMedia[];
@@ -35,13 +35,16 @@ const prevSlide = () => {
     </h2>
 
     <div class="relative flex justify-center overflow-hidden rounded-2xl">
-      <div class="absolute z-10 w-full flex items-center justify-between top-1/2 px-3" v-if="imagesSlider.length > 1">
-        <app-slider-button @click="prevSlide()">
-          <app-icon name="arrow" class="w-7 h-7 rotate-90" />
-        </app-slider-button>
-        <app-slider-button @click="nextSlide()">
-          <app-icon name="arrow" class="w-7 h-7 -rotate-90" />
-        </app-slider-button>
+      <div
+        v-if="imagesSlider.length > 1"
+        class="absolute z-10 w-full flex items-center justify-between top-1/2 px-3"
+      >
+        <AppSliderButton @click="prevSlide()">
+          <AppIcon name="arrow" class="w-7 h-7 rotate-90" />
+        </AppSliderButton>
+        <AppSliderButton @click="nextSlide()">
+          <AppIcon name="arrow" class="w-7 h-7 -rotate-90" />
+        </AppSliderButton>
       </div>
       <div
         class="flex duration-500 ease-out will-change-transform"

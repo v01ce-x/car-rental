@@ -1,44 +1,40 @@
 <script setup lang="ts">
-import { FILTER_DATA } from '@/entities/filter';
-import { AppButton, AppIcon, FormColor, FormPrice, FormSegment, FormSelect } from '@/shared/ui';
+import { FormFilter } from '@/features/home';
+import { AppIcon } from '@/shared/ui';
+
+import { filterBarVariants } from './filter-bar.variants.ts';
+import {watch} from "vue";
+import {scrollControl} from "@/shared/utils";
 
 interface Props {
   isOpenFilter: boolean;
 }
 
-defineProps<Props>();
+const props = defineProps<Props>();
 const emit = defineEmits<{
-  (e: 'switchFlag'): void;
+  (e: 'closeFilterBar'): void;
 }>();
+
+const { root, inner, header } = filterBarVariants();
+2
+watch(() => props.isOpenFilter, () => {
+  scrollControl(props.isOpenFilter)
+})
 </script>
 
 <template>
   <transition name="filter-slide">
-    <div v-if="isOpenFilter" class="fixed inset-0 bg-outline">
-      <aside class="absolute right-0 top-0 p-3 max-w-125 w-full h-full">
-        <div
-          class="flex flex-col justify-between gap-y-2.5 bg-primary-foreground h-full rounded-2xl p-6"
-        >
-          <div class="flex items-center justify-between text-foreground">
+    <div v-if="isOpenFilter" class="fixed inset-0 bg-outline" @click="emit('closeFilterBar')">
+      <aside :class="root()" ref="filterBar" @click.stop>
+        <div :class="inner()">
+          <div :class="header()">
             <h3 class="text-2xl font-bold">Фильтры</h3>
-            <div class="p-2 cursor-pointer" @click="emit('switchFlag')">
+            <div class="p-2 cursor-pointer" @click="emit('closeFilterBar')">
               <AppIcon name="cross" class="w-6 h-6" />
             </div>
           </div>
 
-          <form class="grid gap-y-6">
-            <FormSelect label="марка" placeholder="Выберите марку" />
-            <FormSelect label="Тип кузова" placeholder="Выберите кузов" />
-            <FormSegment label="Руль" :items="FILTER_DATA.steering" />
-            <FormSegment label="Коробка передач" :items="FILTER_DATA.transmission" />
-            <FormPrice />
-            <FormColor :colors="FILTER_DATA.colors" />
-          </form>
-
-          <div class="flex gap-x-4 w-full">
-            <AppButton variant="secondary"> Сбросить фильтры </AppButton>
-            <AppButton variant="primary"> Найти </AppButton>
-          </div>
+          <FormFilter />
         </div>
       </aside>
     </div>

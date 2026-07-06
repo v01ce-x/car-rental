@@ -1,41 +1,68 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { useForm } from 'vee-validate';
 
-import { AppButton, AppIcon, FormCalendar, FormField, FormInput } from '@/shared/ui';
+import { AppButton, AppIcon, FormField, FormInput } from '@/shared/ui';
 
-import SearchBarVariants from '../lib/search-bar.variants.ts';
+import type { SearchBarValues } from '../lib/validation.ts';
 
-import '@vuepic/vue-datepicker/dist/main.css';
+import { searchBarSchema } from '../lib/validation.ts';
+import SearchBarVariants from './search-bar.variants.ts';
+import {useCarFiltersStore} from "@/entities/car";
 
 const emit = defineEmits<{
-  (e: 'switchFlag'): void;
+  (e: 'openFilterBar'): void;
 }>();
-const startDate = ref<number>(Date.now());
-const endDate = ref<number>(Date.now());
 
-const { dateSearch, center } = SearchBarVariants();
+const { defineField } = useForm<SearchBarValues>({
+  validationSchema: searchBarSchema
+});
+const carFiltersStore = useCarFiltersStore()
+
+const [startDate, startDateAttrs] = defineField('startDate');
+const [endDate, endDateAttrs] = defineField('endDate');
+const [search, searchAttrs] = defineField('search');
+
+const { center } = SearchBarVariants();
+
+const handleClick = () => {
+  carFiltersStore.setFilters({
+    search: search.value || ''
+  });
+}
 </script>
 
 <template>
-  <form class="flex items-center justify-between">
+  <form class="flex items-center justify-between" @submit.prevent="handleClick">
     <div :class="center()">
-      <FormField label="Начало аренды" is-date>
-        <FormCalendar v-model="startDate" :class="dateSearch()" />
+      <FormField label="Начало аренды" class="w-69.5">
+        <AppIcon name="calendar-days" class="w-4 h-4 text-input" />
+        <FormInput
+          v-model="startDate"
+          v-bind="startDateAttrs"
+          type="date"
+          class="[&::-webkit-calendar-picker-indicator]:hidden cursor-pointer"
+        />
       </FormField>
 
-      <FormField label="Окончание аренды" is-date>
-        <FormCalendar v-model="endDate" :class="dateSearch()" />
+      <FormField label="Окончание аренды" class="w-69.5">
+        <AppIcon name="calendar-days" class="w-4 h-4 text-input" />
+        <FormInput
+          v-model="endDate"
+          v-bind="endDateAttrs"
+          type="date"
+          class="[&::-webkit-calendar-picker-indicator]:hidden cursor-pointer"
+        />
       </FormField>
     </div>
 
-    <FormField label="Поиск" class="max-w-80">
+    <FormField label="Поиск" class="max-w-80 w-full">
       <AppIcon name="search" class="w-4 h-4 text-input" />
-      <FormInput placeholder="Модель машины" />
+      <FormInput v-model="search" v-bind="searchAttrs" placeholder="Марка машины" />
     </FormField>
 
     <div :class="center()">
       <AppButton variant="primary"> Найти машину </AppButton>
-      <div class="p-4 cursor-pointer" @click="() => emit('switchFlag')">
+      <div class="p-4 cursor-pointer" @click="() => emit('openFilterBar')">
         <AppIcon name="list-filter" class="w-5 h-5" />
       </div>
     </div>

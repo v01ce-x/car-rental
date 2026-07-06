@@ -1,8 +1,12 @@
 <script setup lang="ts">
-import { useCars } from '@/entities/car';
 import { CarCard } from '@/widgets/car';
+import type {Car} from "@/entities/car";
 
-const { data: cars } = useCars();
+interface Props {
+  cars: Car[]
+}
+
+defineProps<Props>()
 </script>
 
 <template>

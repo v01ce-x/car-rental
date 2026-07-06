@@ -3,7 +3,7 @@ import { NavigationHeader } from '@/features/header';
 import { Routes } from '@/shared/lib';
 import { AppButton, AppIcon } from '@/shared/ui';
 
-import { HeaderVariants } from '../lib/header.variants.ts';
+import { HeaderVariants } from './header.variants.ts';
 
 const { header, logo, title, button, icon } = HeaderVariants();
 </script>

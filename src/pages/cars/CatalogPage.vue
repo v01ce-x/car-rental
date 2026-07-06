@@ -3,21 +3,28 @@ import { ref } from 'vue';
 
 import { SearchBar } from '@/features/home';
 import { CarGrid, FilterBar } from '@/widgets/car';
+import {useCars} from "@/entities/car";
+
+const { data: cars } = useCars();
 
 const isOpenFilter = ref(false);
 
-const switchFlag = () => {
+const openFilterBar = () => {
   isOpenFilter.value = !isOpenFilter.value;
+};
+
+const closeFilterBar = () => {
+  isOpenFilter.value = false;
 };
 </script>
 
 <template>
   <div class="grid gap-y-10">
-    <SearchBar @switch-flag="switchFlag" />
+    <SearchBar @open-filter-bar="openFilterBar" />
 
-    <CarGrid />
+    <CarGrid :cars="cars" v-if="cars"/>
     <teleport to="#screen">
-      <FilterBar :is-open-filter="isOpenFilter" @switch-flag="switchFlag" />
+      <FilterBar :is-open-filter="isOpenFilter" @close-filter-bar="closeFilterBar" />
     </teleport>
   </div>
 </template>

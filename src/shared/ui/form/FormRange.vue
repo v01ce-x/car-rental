@@ -19,7 +19,7 @@ const { style: styleMaxPrice, position: positionMaxPrice } = slideRange(
   sliderContainer,
   width,
   true,
-  () => positionMinPrice.value.x
+  () => positionMaxPrice.value.x
 );
 
 const { style: styleMinPrice, position: positionMinPrice } = slideRange(
@@ -27,7 +27,7 @@ const { style: styleMinPrice, position: positionMinPrice } = slideRange(
   sliderContainer,
   width,
   false,
-  () => positionMaxPrice.value.x
+  () => positionMinPrice.value.x
 );
 
 const activeTrackStyle = computed(() => {
