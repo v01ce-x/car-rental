@@ -2,8 +2,8 @@
 import { formVariants } from './form.variants.ts';
 
 interface Props {
-  label?: string;
   isDate?: boolean;
+  label?: string;
 }
 
 defineProps<Props>();

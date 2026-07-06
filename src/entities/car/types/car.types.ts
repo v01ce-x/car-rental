@@ -1,17 +1,18 @@
-interface CarMedia {
-  url: string;
+export interface CarMedia {
   isCover: boolean;
+  url: string;
 }
 
 export interface Car {
-  id: number;
-  name: string;
-  brand: string;
-  media: CarMedia[];
-  transmission: string;
-  price: number;
-  location: string;
-  color: string;
   bodyType: string;
+  brand: string;
+  color: string;
+  id: number;
+  location: string;
+  media: CarMedia[];
+  name: string;
+  price: number;
+  rents: unknown[];
   steering: string;
+  transmission: string;
 }

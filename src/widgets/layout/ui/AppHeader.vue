@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import { AppButton, AppIcon } from '@/shared/ui';
 import { NavigationHeader } from '@/features/header';
+import { Routes } from '@/shared/lib';
+import { AppButton, AppIcon } from '@/shared/ui';
+
 import { HeaderVariants } from '../lib/header.variants.ts';
 
 const { header, logo, title, button, icon } = HeaderVariants();
@@ -8,18 +10,18 @@ const { header, logo, title, button, icon } = HeaderVariants();
 
 <template>
   <header :class="header()">
-    <div :class="logo()">
-      <app-icon name="logo" class="w-7.5 h-5.5" />
+    <router-link :to="Routes.catalog.path" :class="logo()">
+      <AppIcon name="logo" class="w-7.5 h-5.5" />
       <h1 :class="title()">leasing</h1>
-    </div>
+    </router-link>
 
     <div class="flex items-center gap-x-6">
-      <navigation-header />
+      <NavigationHeader />
 
-      <app-button variant="exit" :class="button()">
+      <AppButton variant="exit" :class="button()">
         <span class="text-[14px] font-bold">Выйти</span>
-        <app-icon name="exit" :class="icon()" />
-      </app-button>
+        <AppIcon name="exit" :class="icon()" />
+      </AppButton>
     </div>
   </header>
 </template>

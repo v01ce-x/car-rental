@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import { formVariants } from './form.variants.ts';
 import { useElementBounding } from '@vueuse/core';
 import { computed, ref } from 'vue';
-import { slideRange } from '@/shared/composibles';
+
+import { slideRange } from '@/shared/utils';
+
+import { formVariants } from './form.variants.ts';
 
 const { rangeSlider } = formVariants();
 
@@ -12,20 +14,20 @@ const sliderContainer = ref<HTMLElement | null>(null);
 
 const { width } = useElementBounding(sliderContainer);
 
-const { style: styleMinPrice, position: positionMinPrice } = slideRange(
-  minPrice,
-  sliderContainer,
-  width,
-  false,
-  () => positionMaxPrice.value.x
-);
-
 const { style: styleMaxPrice, position: positionMaxPrice } = slideRange(
   maxPrice,
   sliderContainer,
   width,
   true,
   () => positionMinPrice.value.x
+);
+
+const { style: styleMinPrice, position: positionMinPrice } = slideRange(
+  minPrice,
+  sliderContainer,
+  width,
+  false,
+  () => positionMaxPrice.value.x
 );
 
 const activeTrackStyle = computed(() => {

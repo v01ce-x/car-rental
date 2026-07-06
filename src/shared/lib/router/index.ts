@@ -1,6 +1,10 @@
 export const Routes = {
-  home: {
-    path: '/',
-    name: 'home'
+  catalog: {
+    path: '/cars',
+    name: 'catalog'
+  },
+  carDetail: {
+    path: '/cars/:id',
+    name: 'carDetail'
   }
 };

@@ -1,16 +1,16 @@
 export interface Brand {
-  id: number;
   brand: string;
+  id: number;
 }
 
 export interface BodyType {
-  id: number;
   bodyType: string;
+  id: number;
 }
 
 export interface Color {
-  id: number;
   color: string;
+  id: number;
 }
 
 export interface SteeringType {
@@ -24,8 +24,8 @@ export interface TransmissionType {
 }
 
 export interface Filter {
-  brands: Brand[];
   bodyTypes: BodyType[];
+  brands: Brand[];
   colors: Color[];
   steering: SteeringType[];
   transmission: TransmissionType[];

@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { SearchBar } from '@/features/home';
-import { FilterBar, ProductGrid } from '@/widgets/home';
 import { ref } from 'vue';
+
+import { SearchBar } from '@/features/home';
+import { CarGrid, FilterBar } from '@/widgets/car';
 
 const isOpenFilter = ref(false);
 
@@ -12,11 +13,11 @@ const switchFlag = () => {
 
 <template>
   <div class="grid gap-y-10">
-    <search-bar @switch-flag="switchFlag" />
+    <SearchBar @switch-flag="switchFlag" />
 
-    <product-grid />
+    <CarGrid />
     <teleport to="#screen">
-      <filter-bar :is-open-filter="isOpenFilter" @switch-flag="switchFlag" />
+      <FilterBar :is-open-filter="isOpenFilter" @switch-flag="switchFlag" />
     </teleport>
   </div>
 </template>

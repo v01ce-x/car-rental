@@ -1,4 +1,5 @@
 export * from './button';
-export * from './icon';
 export * from './circle-button';
+export * from './description';
 export * from './form';
+export * from './icon';

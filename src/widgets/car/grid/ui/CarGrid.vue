@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { useCars } from '@/entities/car';
-import { ProductCard } from '@/widgets/home';
+import { CarCard } from '@/widgets/car';
 
 const { data: cars } = useCars();
 </script>
 
 <template>
   <div class="grid grid-cols-4 gap-10">
-    <ProductCard v-for="car in cars" :car />
+    <CarCard v-for="car in cars" :key="car.id" :car />
   </div>
 </template>
 

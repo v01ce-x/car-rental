@@ -1,5 +1,7 @@
+import type { Ref } from 'vue';
+
 import { useDraggable } from '@vueuse/core';
-import { type Ref, watch } from 'vue';
+import { watch } from 'vue';
 
 export const slideRange = (
   marker: Ref<HTMLElement | null>,

@@ -1,8 +1,8 @@
-export { default as FormInput } from './FormInput.vue';
-export { default as FormField } from './FormField.vue';
 export { default as FormCalendar } from './FormCalendar.vue';
-export { default as FormSelect } from './FormSelect.vue';
-export { default as FormSegment } from './FormSegment.vue';
+export { default as FormColor } from './FormColor.vue';
+export { default as FormField } from './FormField.vue';
+export { default as FormInput } from './FormInput.vue';
 export { default as FormPrice } from './FormPrice.vue';
 export { default as FormRange } from './FormRange.vue';
-export { default as FormColor } from './FormColor.vue';
+export { default as FormSegment } from './FormSegment.vue';
+export { default as FormSelect } from './FormSelect.vue';

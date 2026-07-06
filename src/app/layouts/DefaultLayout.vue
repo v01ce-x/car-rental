@@ -4,9 +4,11 @@ import AppHeader from '@/widgets/layout/ui/AppHeader.vue';
 
 <template>
   <div id="screen" class="max-w-300 w-full mx-auto my-16">
-    <app-header />
+    <AppHeader />
 
-    <main class="my-4"><slot /></main>
+    <main class="my-4">
+      <slot />
+    </main>
   </div>
 </template>
 

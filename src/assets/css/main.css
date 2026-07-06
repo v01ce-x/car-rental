@@ -10,6 +10,7 @@
   /* Border color */
   --color-hard: #0b0b0b;
   --color-input: #b7b7b7;
+  --color-ring: #ebebeb;
 
   /* Text color */
   --color-primary-foreground: #fbfbfb;
@@ -29,6 +30,7 @@
 
 html {
   font-family: var(--font-sans), serif !important;
+  color: var(--color-button-primary);
 }
 
 input {

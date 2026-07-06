@@ -1,2 +1,2 @@
-export * from './instance.ts';
 export * from './api.types.ts';
+export * from './instance.ts';

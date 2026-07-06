@@ -10,5 +10,5 @@ const model = defineModel<string>({ default: '' });
 </script>
 
 <template>
-  <input :type="type" v-model="model" :placeholder="placeholder" class="placeholder-input" />
+  <input v-model="model" :type="type" :placeholder="placeholder" class="placeholder-input" />
 </template>

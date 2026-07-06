@@ -3,7 +3,7 @@ import { DefaultLayout } from '@/app/layouts';
 </script>
 
 <template>
-  <default-layout>
+  <DefaultLayout>
     <router-view />
-  </default-layout>
+  </DefaultLayout>
 </template>

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+
 import { AppIcon } from '@/shared/ui';
 
 interface Props {
@@ -15,18 +16,20 @@ const isOpen = ref(false);
 
 <template>
   <div ref="selectElement" class="relative flex flex-col gap-y-1" @click="isOpen = !isOpen">
-    <h4 class="capitalize text-[14px] font-medium">{{ label }}</h4>
+    <h4 class="capitalize text-[14px] font-medium">
+      {{ label }}
+    </h4>
     <div
       class="flex justify-between items-center px-3 py-3.5 rounded-full border border-input text-input cursor-pointer capitalize"
     >
       <span>{{ placeholder }}</span>
       <div class="p-1">
-        <app-icon name="arrow" class="w-5 h-5" />
+        <AppIcon name="arrow" class="w-5 h-5" />
       </div>
     </div>
 
     <transition name="select-dropdown">
-      <div class="" v-if="isOpen"></div>
+      <div v-if="isOpen" class="" />
     </transition>
   </div>
 </template>

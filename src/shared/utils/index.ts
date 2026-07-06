@@ -1,2 +1,3 @@
 export * from './getImageUrl.ts';
-export * from './getTypeTransmission.ts';
+export * from './getTranslations.ts';
+export * from './slideRange.ts';
