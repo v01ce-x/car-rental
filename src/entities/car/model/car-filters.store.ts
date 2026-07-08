@@ -1,9 +1,9 @@
-import { reactive } from 'vue';
 import { defineStore } from 'pinia';
-import type { Filters } from "@/entities/car";
+import { reactive } from 'vue';
+
+import type { Filters } from '@/entities/car';
 
 export const useCarFiltersStore = defineStore('carFilters', () => {
-
   const defaultFiltersBase = {
     search: '',
     brand: '',
@@ -11,8 +11,8 @@ export const useCarFiltersStore = defineStore('carFilters', () => {
     steering: '',
     color: '',
     minPrice: 0,
-    maxPrice: 1000000,
-    transmission: '',
+    maxPrice: 10_000,
+    transmission: ''
   };
 
   const filters = reactive({ ...defaultFiltersBase });
@@ -21,22 +21,18 @@ export const useCarFiltersStore = defineStore('carFilters', () => {
     Object.assign(filters, values);
   };
 
-  const getActiveFilters = (): Partial<Filters> => {
-    return Object.entries(filters).reduce((acc, [key, value]) => {
+  const getActiveFilters = (): Partial<Filters> =>
+    Object.entries(filters).reduce((acc, [key, value]) => {
       if (value === '' || value === null || value === undefined) {
         return acc;
       }
 
-      if (key === 'minPrice' && value === defaultFiltersBase.minPrice) return acc;
-      if (key === 'maxPrice' && value === defaultFiltersBase.maxPrice) return acc;
-
       return { ...acc, [key]: value };
     }, {} as Partial<Filters>);
-  };
 
   return {
     filters,
     setFilters,
-    getActiveFilters,
+    getActiveFilters
   };
 });

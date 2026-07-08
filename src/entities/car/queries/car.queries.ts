@@ -2,7 +2,7 @@ import { defineQuery, useQuery } from '@pinia/colada';
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 
-import {carService, useCarFiltersStore} from '@/entities/car';
+import { carService, useCarFiltersStore } from '@/entities/car';
 
 import { CAR_QUERY_KEYS } from './car.keys.ts';
 
@@ -13,10 +13,8 @@ export const useCars = defineQuery(() => {
     key: () => CAR_QUERY_KEYS.byFilters(carFiltersStore.getActiveFilters()),
 
     query: () => carService.cars(carFiltersStore.getActiveFilters())
-
   });
 });
-
 
 export const useCarDetail = () => {
   const route = useRoute();

@@ -1,12 +1,13 @@
 <script setup lang="ts">
+import type { Car } from '@/entities/car';
+
 import { CarCard } from '@/widgets/car';
-import type {Car} from "@/entities/car";
 
 interface Props {
-  cars: Car[]
+  cars: Car[];
 }
 
-defineProps<Props>()
+defineProps<Props>();
 </script>
 
 <template>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { NavigationHeader } from '@/features/header';
 import { Routes } from '@/shared/lib';
-import { AppButton, AppIcon } from '@/shared/ui';
+import { AppButton, AppIcon, SwitchThemeButton } from '@/shared/ui';
 
 import { HeaderVariants } from './header.variants.ts';
 
@@ -16,12 +16,16 @@ const { header, logo, title, button, icon } = HeaderVariants();
     </router-link>
 
     <div class="flex items-center gap-x-6">
-      <NavigationHeader />
+      <switch-theme-button />
 
-      <AppButton variant="exit" :class="button()">
-        <span class="text-[14px] font-bold">Выйти</span>
-        <AppIcon name="exit" :class="icon()" />
-      </AppButton>
+      <div class="flex items-center gap-x-6">
+        <NavigationHeader />
+
+        <AppButton variant="exit" :class="button()">
+          <span class="text-[14px] font-bold">Выйти</span>
+          <AppIcon name="exit" :class="icon()" />
+        </AppButton>
+      </div>
     </div>
   </header>
 </template>

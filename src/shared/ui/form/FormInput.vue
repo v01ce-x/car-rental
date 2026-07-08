@@ -15,6 +15,6 @@ const model = defineModel();
     :type="type"
     :placeholder="placeholder"
     onclick="type === 'date' ? this.showPicker() : ''"
-    class="placeholder-input text-input w-full"
+    class="placeholder-input text-primary w-full"
   />
 </template>

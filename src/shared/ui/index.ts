@@ -3,3 +3,4 @@ export * from './circle-button';
 export * from './description';
 export * from './form';
 export * from './icon';
+export * from './loading';

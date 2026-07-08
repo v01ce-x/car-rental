@@ -50,13 +50,18 @@ export interface MockFilters {
   transmission: TransmissionType[];
 }
 
+export interface Price {
+  maxPrice: number | '';
+  minPrice: number | '';
+}
+
 export interface Filters {
-  search: string
-  brand: string;
   bodyType: string;
-  steering: string;
+  brand: string;
   color: string;
-  minPrice: number;
-  maxPrice: number;
+  maxPrice: number | '';
+  minPrice: number | '';
+  search: string;
+  steering: string;
   transmission: string;
 }

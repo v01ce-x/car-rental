@@ -18,6 +18,7 @@ const imagesSlider = computed(() => [
   ...props.media.filter((m) => m.isCover),
   ...props.media.filter((m) => !m.isCover)
 ]);
+const isOpenImage = ref(false);
 
 const nextSlide = () => {
   currentIndex.value = (currentIndex.value + 1) % imagesSlider.value.length;
@@ -25,6 +26,13 @@ const nextSlide = () => {
 const prevSlide = () => {
   currentIndex.value =
     (currentIndex.value - 1 + imagesSlider.value.length) % imagesSlider.value.length;
+};
+
+const openImage = () => {
+  isOpenImage.value = true;
+};
+const closeImage = () => {
+  isOpenImage.value = false;
 };
 </script>
 
@@ -50,13 +58,40 @@ const prevSlide = () => {
         class="flex duration-500 ease-out will-change-transform"
         :style="{ transform: `translateX(-${currentIndex * 100}%)` }"
       >
-        <div v-for="image in imagesSlider" :key="image.url" class="w-full h-96 shrink-0">
+        <div
+          v-for="image in imagesSlider"
+          :key="image.url"
+          @click="openImage()"
+          class="w-full h-96 shrink-0"
+        >
           <img
             :src="imageAdapter(image.url)"
             alt="Фото машины"
-            class="w-full h-full object-cover select-none"
+            class="w-full h-full object-cover select-none cursor-pointer"
           />
         </div>
+        <teleport to="#screen">
+          <transition name="image">
+            <div
+              v-if="isOpenImage"
+              @click="closeImage()"
+              class="w-full h-full z-101 flex items-center justify-center fixed top-0 right-0 bg-outline select-none"
+            >
+              <div class="w-5/6 relative" @click.stop>
+                <img
+                  :src="imageAdapter(imagesSlider[currentIndex].url)"
+                  alt="Машина"
+                  class="w-full max-h-175 rounded-4xl"
+                />
+                <app-icon
+                  name="cross"
+                  @click="closeImage()"
+                  class="w-6 h-6 cursor-pointer text-black absolute top-5 right-5"
+                />
+              </div>
+            </div>
+          </transition>
+        </teleport>
       </div>
     </div>
 
@@ -87,4 +122,24 @@ const prevSlide = () => {
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.image-enter-active,
+.image-leave-active {
+  transition: opacity 0.3s ease-in-out;
+}
+
+.image-enter-from,
+.image-leave-to {
+  opacity: 0;
+}
+
+.image-enter-active .filter-sidebar,
+.image-leave-active .filter-sidebar {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.image-enter-from .filter-sidebar,
+.image-leave-to .filter-sidebar {
+  transform: translateX(100%);
+}
+</style>

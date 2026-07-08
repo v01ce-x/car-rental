@@ -38,12 +38,10 @@ const handleClick = () => router.push(Routes.carDetail.path.replace(':id', Strin
       </div>
       <div class="flex flex-col">
         <span class="text-foreground">{{ car.price }} &#8381;</span>
-        <span class="text-surface text-[14px]">112 000 ₽ за 14 дней</span>
+        <span class="text-surface text-[14px]">{{ car.price * 14 }} &#8381; за 14 дней</span>
       </div>
     </div>
 
     <AppButton variant="secondary" @click="handleClick()"> Подробнее </AppButton>
   </article>
 </template>
-
-<style scoped></style>

@@ -1,10 +1,11 @@
 <script setup lang="ts">
+import { watch } from 'vue';
+
 import { FormFilter } from '@/features/home';
 import { AppIcon } from '@/shared/ui';
+import { scrollControl } from '@/shared/utils';
 
 import { filterBarVariants } from './filter-bar.variants.ts';
-import {watch} from "vue";
-import {scrollControl} from "@/shared/utils";
 
 interface Props {
   isOpenFilter: boolean;
@@ -16,16 +17,19 @@ const emit = defineEmits<{
 }>();
 
 const { root, inner, header } = filterBarVariants();
-2
-watch(() => props.isOpenFilter, () => {
-  scrollControl(props.isOpenFilter)
-})
+
+watch(
+  () => props.isOpenFilter,
+  () => {
+    scrollControl(props.isOpenFilter);
+  }
+);
 </script>
 
 <template>
   <transition name="filter-slide">
     <div v-if="isOpenFilter" class="fixed inset-0 bg-outline" @click="emit('closeFilterBar')">
-      <aside :class="root()" ref="filterBar" @click.stop>
+      <aside :class="root()" @click.stop>
         <div :class="inner()">
           <div :class="header()">
             <h3 class="text-2xl font-bold">Фильтры</h3>
@@ -34,7 +38,7 @@ watch(() => props.isOpenFilter, () => {
             </div>
           </div>
 
-          <FormFilter />
+          <FormFilter @close-filter-bar="emit('closeFilterBar')" />
         </div>
       </aside>
     </div>

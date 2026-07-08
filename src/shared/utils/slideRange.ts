@@ -8,7 +8,10 @@ export const slideRange = (
   container: Ref<HTMLElement | null>,
   width: Ref<number>,
   isEndPosition: boolean = false,
-  getPeerX?: () => number
+  getPeerX?: () => number,
+  valueRef?: Ref<number>,
+  minMax?: { min: number; max: number },
+  onPositionChange?: (x: number) => void
 ) => {
   const { style, position } = useDraggable(marker, {
     initialValue: { x: 0, y: 3 },
@@ -29,18 +32,28 @@ export const slideRange = (
           pos.x = getPeerX();
         }
       }
+
+      if (onPositionChange) {
+        onPositionChange(pos.x);
+      }
     }
   });
 
-  if (isEndPosition) {
+  if (valueRef && minMax) {
     watch(
-      width,
-      (newWidth) => {
-        if (newWidth > 0) {
-          position.value.x = newWidth;
-        }
+      [width, valueRef],
+      ([newWidth, newValue]) => {
+        if (newWidth <= 0) return;
+
+        const ratio = (newValue - minMax.min) / (minMax.max - minMax.min);
+        let targetX = ratio * newWidth;
+
+        if (isEndPosition && getPeerX && targetX < getPeerX()) targetX = getPeerX();
+        if (!isEndPosition && getPeerX && targetX > getPeerX()) targetX = getPeerX();
+
+        position.value.x = targetX;
       },
-      { once: true }
+      { immediate: true }
     );
   }
 

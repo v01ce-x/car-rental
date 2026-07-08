@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { useForm } from 'vee-validate';
 
+import { useCarFiltersStore } from '@/entities/car';
 import { AppButton, AppIcon, FormField, FormInput } from '@/shared/ui';
 
 import type { SearchBarValues } from '../lib/validation.ts';
 
 import { searchBarSchema } from '../lib/validation.ts';
 import SearchBarVariants from './search-bar.variants.ts';
-import {useCarFiltersStore} from "@/entities/car";
 
 const emit = defineEmits<{
   (e: 'openFilterBar'): void;
@@ -16,7 +16,7 @@ const emit = defineEmits<{
 const { defineField } = useForm<SearchBarValues>({
   validationSchema: searchBarSchema
 });
-const carFiltersStore = useCarFiltersStore()
+const carFiltersStore = useCarFiltersStore();
 
 const [startDate, startDateAttrs] = defineField('startDate');
 const [endDate, endDateAttrs] = defineField('endDate');
@@ -28,7 +28,7 @@ const handleClick = () => {
   carFiltersStore.setFilters({
     search: search.value || ''
   });
-}
+};
 </script>
 
 <template>
@@ -62,7 +62,10 @@ const handleClick = () => {
 
     <div :class="center()">
       <AppButton variant="primary"> Найти машину </AppButton>
-      <div class="p-4 cursor-pointer" @click="() => emit('openFilterBar')">
+      <div
+        class="p-4 bg-secondary hover:bg-secondary-hover duration-300 cursor-pointer rounded-full"
+        @click="() => emit('openFilterBar')"
+      >
         <AppIcon name="list-filter" class="w-5 h-5" />
       </div>
     </div>

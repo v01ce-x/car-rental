@@ -1,6 +1,7 @@
 export const translations: Record<string, string> = {
   automatic: 'Автомат',
   manual: 'Механика',
+  '': 'Любой',
   left: 'Левый',
   right: 'Правый',
   sedan: 'Седан',

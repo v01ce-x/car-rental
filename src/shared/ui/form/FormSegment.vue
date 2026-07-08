@@ -1,14 +1,17 @@
-<script setup lang="ts">
+<script setup lang="ts" generic="T extends { id: number }">
 import { ref } from 'vue';
 
-import type { SteeringType, TransmissionType } from '@/entities/car';
+import { translations } from '@/shared/utils';
 
 interface Props {
-  items: SteeringType[] | TransmissionType[];
+  items: T[];
   label: string;
+  getLabel: (item: T) => string;
 }
 
-defineProps<Props>();
+const props = defineProps<Props>();
+
+const model = defineModel();
 
 const position = ref<'translate-x-[200%]' | 'translate-x-0' | 'translate-x-full'>('translate-x-0');
 
@@ -24,6 +27,11 @@ const getPosition = (accent: number): void => {
       position.value = 'translate-x-0';
   }
 };
+
+const handleClick = (item: T): void => {
+  getPosition(item.id);
+  model.value = props.getLabel(item);
+};
 </script>
 
 <template>
@@ -32,21 +40,21 @@ const getPosition = (accent: number): void => {
       {{ label }}
     </h4>
 
-    <div class="relative bg-muted rounded-full">
+    <div class="relative bg-segment rounded-full">
       <div class="w-full rounded-full grid grid-cols-3 justify-items-center p-1 relative z-10">
         <p
           v-for="item of items"
           :key="item.id"
           class="p-2 text-[18px] capitalize font-bold rounded-full cursor-pointer"
-          @click="() => getPosition(item.id)"
+          @click="handleClick(item)"
         >
-          {{ item.type }}
+          {{ translations[getLabel(item)] }}
         </p>
       </div>
 
       <div class="grid grid-cols-3 w-full absolute flex-1 p-1 top-0 select-none">
         <div
-          class="relative rounded-full bg-primary-foreground p-2 text-[18px] text-transparent duration-400"
+          class="relative rounded-full bg-primary-foreground p-2 text-[18px] text-transparent duration-400 shadow-2xl"
           :class="position"
         >
           ------
