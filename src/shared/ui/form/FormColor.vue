@@ -22,7 +22,7 @@ const handleClick = (color: Color): void => {
         v-for="color in colors"
         :key="color.id"
         class="border-2 border-ring rounded-full cursor-pointer duration-500"
-        :class="model === color.color ? 'w-14 h-14' : 'w-10 h-10'"
+        :class="model === color.color ? 'w-12 h-12 sm:w-14 sm:h-14' : 'w-8 h-8 sm:w-10 sm:h-10'"
         :style="{ backgroundColor: color.color }"
         @click="handleClick(color)"
       />

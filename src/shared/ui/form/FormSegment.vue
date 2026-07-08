@@ -42,22 +42,22 @@ const handleClick = (item: T): void => {
 
     <div class="relative bg-segment rounded-full">
       <div class="w-full rounded-full grid grid-cols-3 justify-items-center p-1 relative z-10">
-        <p
+        <span
           v-for="item of items"
           :key="item.id"
-          class="p-2 text-[18px] capitalize font-bold rounded-full cursor-pointer"
+          class="p-2 text-[16px] sm:text-[18px] capitalize font-bold rounded-full cursor-pointer"
           @click="handleClick(item)"
         >
           {{ translations[getLabel(item)] }}
-        </p>
+        </span>
       </div>
 
-      <div class="grid grid-cols-3 w-full absolute flex-1 p-1 top-0 select-none">
+      <div class="grid grid-cols-3 w-full absolute h-full p-1 top-0 select-none">
         <div
-          class="relative rounded-full bg-primary-foreground p-2 text-[18px] text-transparent duration-400 shadow-2xl"
+          class="relative rounded-full bg-primary-foreground p-2 text-[16px] sm:text-[18px] text-transparent duration-400 shadow-2xl"
           :class="position"
         >
-          ------
+          -
         </div>
       </div>
     </div>

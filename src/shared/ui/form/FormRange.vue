@@ -38,7 +38,7 @@ const { style: styleMaxPrice, position: positionMaxPrice } = slideRange(
   sliderContainer,
   width,
   true,
-  () => positionMaxPrice.value.x,
+  () => positionMinPrice.value.x,
   toRef(() => model.value.maxPrice as number),
   { min: MIN_LIMIT, max: MAX_LIMIT },
   (x) => updatePriceFromX(x, true)
@@ -49,7 +49,7 @@ const { style: styleMinPrice, position: positionMinPrice } = slideRange(
   sliderContainer,
   width,
   false,
-  () => positionMinPrice.value.x,
+  () => positionMaxPrice.value.x,
   toRef(() => model.value.minPrice as number),
   { min: MIN_LIMIT, max: MAX_LIMIT },
   (x) => updatePriceFromX(x, false)
@@ -57,7 +57,7 @@ const { style: styleMinPrice, position: positionMinPrice } = slideRange(
 
 const activeTrackStyle = computed(() => {
   const leftOffset = positionMinPrice.value.x;
-  const trackWidth = positionMaxPrice.value.x - positionMinPrice.value.x;
+  const trackWidth = Math.max(0, positionMaxPrice.value.x - positionMinPrice.value.x);
 
   return {
     left: `${leftOffset}px`,
@@ -67,21 +67,21 @@ const activeTrackStyle = computed(() => {
 </script>
 
 <template>
-  <div ref="sliderContainer" class="h-1.5 w-full bg-surface-foreground rounded-full relative">
+  <div ref="sliderContainer" class="h-1.5 w-full bg-button-secondary rounded-full relative">
     <div class="bg-blue-600 h-1.5 absolute rounded-full" :style="activeTrackStyle" />
 
     <div
       ref="minPriceElement"
       :class="rangeSlider()"
       :style="styleMinPrice"
-      class="-translate-x-1/2 touch-none absolute z-20"
+      class="-translate-x-1/2 touch-none absolute z-20 cursor-pointer"
     />
 
     <div
       ref="maxPriceElement"
       :class="rangeSlider()"
       :style="styleMaxPrice"
-      class="-translate-x-1/2 touch-none absolute z-20"
+      class="-translate-x-1/2 touch-none absolute z-20 cursor-pointer"
     />
   </div>
 </template>

@@ -199,7 +199,7 @@ const resetForm = () => {
       <FormColor v-model="filters.color" :colors="FILTER_DATA.colors" />
     </div>
 
-    <div class="flex gap-x-4 w-full">
+    <div class="flex flex-col sm:flex-row gap-4 w-full">
       <AppButton variant="secondary" @click="resetForm()"> Сбросить фильтры </AppButton>
       <AppButton variant="primary"> Найти </AppButton>
     </div>

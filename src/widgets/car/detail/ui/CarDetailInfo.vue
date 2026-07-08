@@ -14,7 +14,7 @@ defineProps<Props>();
 
 <template>
   <div class="pl-3 grid gap-y-4">
-    <div>
+    <div class="hidden lg:block">
       <router-link :to="Routes.catalog.path" class="group flex items-center gap-x-2 p-2">
         <AppIcon name="arrow" class="w-4 h-4 rotate-90 duration-300 group-hover:-translate-x-1" />
         <span>Назад</span>
@@ -64,12 +64,12 @@ defineProps<Props>();
 
     <div class="grid gap-y-4 mt-2">
       <div class="flex items-center gap-x-6 justify-between">
-        <h3 class="text-2xl font-medium">Стоимость</h3>
-        <b class="font-bold text-2xl">{{ carDetail.price }} &#8381; за 1 день</b>
+        <h3 class="text-xl sm:text-2xl font-medium">Стоимость</h3>
+        <b class="font-bold text-xl sm:text-2xl">{{ carDetail.price }} &#8381; за 1 день</b>
       </div>
       <span class="font-medium">Аренда на 14 дней</span>
-      <b class="font-bold text-[32px]">Итог: {{ carDetail.price * 14 }} &#8381;</b>
-      <AppButton variant="primary" class="max-w-80"> Забронировать </AppButton>
+      <b class="font-bold text-[28px] sm:text-[32px]">Итог: {{ carDetail.price * 14 }} &#8381;</b>
+      <AppButton variant="primary" class="sm:max-w-80"> Забронировать </AppButton>
     </div>
   </div>
 </template>

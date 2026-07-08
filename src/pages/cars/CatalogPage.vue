@@ -20,7 +20,11 @@ const closeFilterBar = () => {
 </script>
 
 <template>
-  <div class="grid gap-y-10">
+  <div class="sm:hidden mb-4">
+    <h1 class="text-3xl font-bold">Аренда Машин</h1>
+  </div>
+
+  <div class="grid gap-y-10 justify-items-center">
     <SearchBar @open-filter-bar="openFilterBar" />
 
     <app-loading v-if="isLoading" />
@@ -28,11 +32,11 @@ const closeFilterBar = () => {
     <CarGrid v-else-if="cars?.data.length" :cars="cars.data" />
 
     <div v-else-if="cars?.success" class="flex justify-center mt-10">
-      <span class="text-2xl">По вашему запросу ничего не найдено</span>
+      <span class="text-2xl text-center">По вашему запросу ничего не найдено</span>
     </div>
 
     <div v-else class="flex justify-center mt-10">
-      <span class="text-2xl"
+      <span class="text-2xl text-center"
         >Возникли проблемы при загрузке данных, пожалуйста, перезагрузите сайт</span
       >
     </div>

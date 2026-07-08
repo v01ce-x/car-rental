@@ -1,1 +1,2 @@
-export * from './ui/AppHeader.vue';
+export * from './haeder';
+export * from './footer';

@@ -62,7 +62,7 @@ const closeImage = () => {
           v-for="image in imagesSlider"
           :key="image.url"
           @click="openImage()"
-          class="w-full h-96 shrink-0"
+          class="w-full h-75 sm:h-96 shrink-0"
         >
           <img
             :src="imageAdapter(image.url)"

@@ -22,7 +22,7 @@ const [startDate, startDateAttrs] = defineField('startDate');
 const [endDate, endDateAttrs] = defineField('endDate');
 const [search, searchAttrs] = defineField('search');
 
-const { center } = SearchBarVariants();
+const { rent, buttons } = SearchBarVariants();
 
 const handleClick = () => {
   carFiltersStore.setFilters({
@@ -32,9 +32,12 @@ const handleClick = () => {
 </script>
 
 <template>
-  <form class="flex items-center justify-between" @submit.prevent="handleClick">
-    <div :class="center()">
-      <FormField label="Начало аренды" class="w-69.5">
+  <form
+    class="max-w-143.5 xl:max-w-full w-full flex flex-col xl:flex-row gap-3 items-center justify-between"
+    @submit.prevent="handleClick"
+  >
+    <div :class="rent()">
+      <FormField label="Начало аренды" class="w-full sm:w-69.5">
         <AppIcon name="calendar-days" class="w-4 h-4 text-input" />
         <FormInput
           v-model="startDate"
@@ -44,7 +47,7 @@ const handleClick = () => {
         />
       </FormField>
 
-      <FormField label="Окончание аренды" class="w-69.5">
+      <FormField label="Окончание аренды" class="w-full sm:w-69.5">
         <AppIcon name="calendar-days" class="w-4 h-4 text-input" />
         <FormInput
           v-model="endDate"
@@ -55,13 +58,13 @@ const handleClick = () => {
       </FormField>
     </div>
 
-    <FormField label="Поиск" class="max-w-80 w-full">
+    <FormField label="Поиск" class="xl:max-w-80 w-full">
       <AppIcon name="search" class="w-4 h-4 text-input" />
       <FormInput v-model="search" v-bind="searchAttrs" placeholder="Марка машины" />
     </FormField>
 
-    <div :class="center()">
-      <AppButton variant="primary"> Найти машину </AppButton>
+    <div :class="buttons()">
+      <AppButton variant="primary" class="w-full xl:w-auto"> Найти машину </AppButton>
       <div
         class="p-4 bg-secondary hover:bg-secondary-hover duration-300 cursor-pointer rounded-full"
         @click="() => emit('openFilterBar')"

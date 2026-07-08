@@ -11,7 +11,7 @@
   --color-surface-foreground-hover: #cecece;
   --color-secondary-foreground: #0b0b0b;
   --color-muted: #f3f3f3;
-  --color-segment: #afafaf;
+  --color-segment: #f3f3f3;
 
   /* Border color */
   --color-hard: #0b0b0b;
@@ -53,6 +53,10 @@ body {
   transition: 0.5s ease;
 }
 
+#app {
+  min-height: 100vh;
+}
+
 input {
   outline: none;
   border: none;
@@ -70,6 +74,6 @@ input {
   --color-muted: #0b0b0b;
   --color-segment: #2e2e2e;
   --color-surface-foreground-hover: #727272;
-  --color-secondary: #2E2E2E;
+  --color-secondary: #2e2e2e;
   --color-secondary-hover: #727272;
 }

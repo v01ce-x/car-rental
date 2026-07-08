@@ -20,10 +20,14 @@ export const slideRange = (
     onMove(pos) {
       pos.y = 3;
 
+      if (pos.x < 0) pos.x = 0;
+      if (pos.x > width.value) pos.x = width.value;
+
       if (isEndPosition) {
         if (pos.x >= width.value - 16) {
           pos.x = width.value;
         }
+
         if (getPeerX && pos.x < getPeerX()) {
           pos.x = getPeerX();
         }
@@ -47,6 +51,9 @@ export const slideRange = (
 
         const ratio = (newValue - minMax.min) / (minMax.max - minMax.min);
         let targetX = ratio * newWidth;
+
+        if (targetX > newWidth) targetX = newWidth;
+        if (targetX < 0) targetX = 0;
 
         if (isEndPosition && getPeerX && targetX < getPeerX()) targetX = getPeerX();
         if (!isEndPosition && getPeerX && targetX > getPeerX()) targetX = getPeerX();
