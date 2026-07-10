@@ -12,6 +12,7 @@ const model = defineModel();
 <template>
   <input
     v-model="model"
+    :value="model"
     :type="type"
     :placeholder="placeholder"
     onclick="type === 'date' ? this.showPicker() : ''"

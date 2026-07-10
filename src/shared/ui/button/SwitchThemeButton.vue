@@ -3,9 +3,7 @@ import { onMounted, ref, watch } from 'vue';
 
 const currentTheme = ref('');
 
-const isTheme = () => {
-  return currentTheme.value === 'dark';
-};
+const isTheme = () => currentTheme.value === 'dark';
 
 const switchTheme = () => {
   currentTheme.value === 'dark' ? (currentTheme.value = 'light') : (currentTheme.value = 'dark');
@@ -27,7 +25,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div @click="switchTheme()" class="w-12 h-6.5 rounded-full p-0.5 bg-surface cursor-pointer">
+  <div class="w-12 h-6.5 rounded-full p-0.5 bg-surface cursor-pointer" @click="switchTheme()">
     <div
       class="rounded-full bg-surface-foreground h-full w-1/2 duration-300"
       :class="isTheme() ? 'translate-x-full' : 'translate-x-0'"

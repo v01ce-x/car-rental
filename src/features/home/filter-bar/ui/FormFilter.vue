@@ -1,10 +1,14 @@
 <script setup lang="ts">
 import { reactive } from 'vue';
 
-import { type Filters, type MockFilters, useCarFiltersStore } from '@/entities/car';
+import type { Filters, MockFilters } from '@/entities/car';
 
+import { useCarFiltersStore } from '@/entities/car';
 import { AppButton, FormColor, FormPrice, FormSegment, FormSelect } from '@/shared/ui';
 
+const emit = defineEmits<{
+  (e: 'closeFilterBar'): void;
+}>();
 const carFiltersStore = useCarFiltersStore();
 const FILTER_DATA: MockFilters = {
   brands: [
@@ -130,10 +134,6 @@ const FILTER_DATA: MockFilters = {
     }
   ]
 };
-
-const emit = defineEmits<{
-  (e: 'closeFilterBar'): void;
-}>();
 
 const filters: Omit<Filters, 'search'> = reactive({
   brand: '',

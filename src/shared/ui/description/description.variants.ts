@@ -10,7 +10,7 @@ export const descriptionVariants = tv({
     },
     sizeTextDescription: {
       sm: 'text-[14px]',
-      md: 'text-[18px]'
+      md: 'text-[16px] md:text-[18px]'
     },
     sizeTextLabel: {
       sm: 'text-[14px]',

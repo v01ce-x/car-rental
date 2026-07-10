@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { useForm } from 'vee-validate';
+import { onMounted, watch } from 'vue';
 
-import { useCarFiltersStore } from '@/entities/car';
+import { useCarFiltersStore, useRegistrationRentalStore } from '@/entities/car';
 import { AppButton, AppIcon, FormField, FormInput } from '@/shared/ui';
+import { adjustBookingDates } from '@/shared/utils';
 
 import type { SearchBarValues } from '../lib/validation.ts';
 
@@ -17,6 +19,7 @@ const { defineField } = useForm<SearchBarValues>({
   validationSchema: searchBarSchema
 });
 const carFiltersStore = useCarFiltersStore();
+const registrationRentalStore = useRegistrationRentalStore();
 
 const [startDate, startDateAttrs] = defineField('startDate');
 const [endDate, endDateAttrs] = defineField('endDate');
@@ -29,6 +32,27 @@ const handleClick = () => {
     search: search.value || ''
   });
 };
+
+onMounted(() => {
+  startDate.value = registrationRentalStore.rentalData.startDate;
+  endDate.value = registrationRentalStore.rentalData.endDate;
+});
+
+watch([() => startDate.value, () => endDate.value], ([newStart, newEnd]) => {
+  if (!newStart || !newEnd) return;
+
+  const adjusted = adjustBookingDates(newStart, newEnd);
+
+  if (adjusted.endDate !== newEnd) {
+    endDate.value = adjusted.endDate ?? '';
+  }
+  if (adjusted.startDate !== newStart) {
+    startDate.value = adjusted.startDate ?? '';
+  }
+
+  registrationRentalStore.rentalData.startDate = startDate.value;
+  registrationRentalStore.rentalData.endDate = endDate.value;
+});
 </script>
 
 <template>

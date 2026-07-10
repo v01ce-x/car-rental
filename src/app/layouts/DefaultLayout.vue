@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { AppHeader, AppFooter } from '@/widgets/layout';
+import { AppFooter, AppHeader } from '@/widgets/layout';
 </script>
 
 <template>
   <div
     id="screen"
-    class="flex flex-col justify-between min-h-screen max-w-300 w-full mx-auto py-8 sm:py-16 px-2"
+    class="flex flex-col justify-between min-h-screen max-w-300 w-full mx-auto py-0 md:py-8 px-2"
   >
     <div>
       <AppHeader />

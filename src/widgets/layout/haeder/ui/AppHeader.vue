@@ -17,7 +17,7 @@ const { header, logo, title, button, icon } = HeaderVariants();
       </router-link>
 
       <div class="flex items-center gap-x-6">
-        <switch-theme-button />
+        <SwitchThemeButton />
 
         <div class="flex items-center gap-x-6">
           <NavigationHeader />

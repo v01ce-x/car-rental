@@ -38,7 +38,7 @@ const { style: styleMaxPrice, position: positionMaxPrice } = slideRange(
   sliderContainer,
   width,
   true,
-  () => positionMinPrice.value.x,
+  () => positionMaxPrice.value.x,
   toRef(() => model.value.maxPrice as number),
   { min: MIN_LIMIT, max: MAX_LIMIT },
   (x) => updatePriceFromX(x, true)
@@ -49,7 +49,7 @@ const { style: styleMinPrice, position: positionMinPrice } = slideRange(
   sliderContainer,
   width,
   false,
-  () => positionMaxPrice.value.x,
+  () => positionMinPrice.value.x,
   toRef(() => model.value.minPrice as number),
   { min: MIN_LIMIT, max: MAX_LIMIT },
   (x) => updatePriceFromX(x, false)

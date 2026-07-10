@@ -39,10 +39,10 @@ watch(
     <h4 class="text-[18px] text-foreground">Стоимость</h4>
 
     <div class="flex gap-x-4">
-      <FormField label="от" class="max-w-51.5">
+      <FormField label="От" class="max-w-51.5">
         <FormInput v-model="price.minPrice" type="number" />
       </FormField>
-      <FormField label="до" class="max-w-51.5">
+      <FormField label="До" class="max-w-51.5">
         <FormInput v-model="price.maxPrice" type="number" />
       </FormField>
     </div>

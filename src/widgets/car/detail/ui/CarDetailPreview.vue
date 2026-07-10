@@ -61,8 +61,8 @@ const closeImage = () => {
         <div
           v-for="image in imagesSlider"
           :key="image.url"
-          @click="openImage()"
           class="w-full h-75 sm:h-96 shrink-0"
+          @click="openImage()"
         >
           <img
             :src="imageAdapter(image.url)"
@@ -74,8 +74,8 @@ const closeImage = () => {
           <transition name="image">
             <div
               v-if="isOpenImage"
-              @click="closeImage()"
               class="w-full h-full z-101 flex items-center justify-center fixed top-0 right-0 bg-outline select-none"
+              @click="closeImage()"
             >
               <div class="w-5/6 relative" @click.stop>
                 <img
@@ -83,10 +83,10 @@ const closeImage = () => {
                   alt="Машина"
                   class="w-full max-h-175 rounded-4xl"
                 />
-                <app-icon
+                <AppIcon
                   name="cross"
-                  @click="closeImage()"
                   class="w-6 h-6 cursor-pointer text-black absolute top-5 right-5"
+                  @click="closeImage()"
                 />
               </div>
             </div>

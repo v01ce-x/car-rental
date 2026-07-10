@@ -69,7 +69,10 @@ defineProps<Props>();
       </div>
       <span class="font-medium">Аренда на 14 дней</span>
       <b class="font-bold text-[28px] sm:text-[32px]">Итог: {{ carDetail.price * 14 }} &#8381;</b>
-      <AppButton variant="primary" class="sm:max-w-80"> Забронировать </AppButton>
+
+      <router-link :to="Routes.carSelection.path">
+        <AppButton variant="primary" class="sm:max-w-80"> Забронировать </AppButton>
+      </router-link>
     </div>
   </div>
 </template>

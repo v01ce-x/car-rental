@@ -3,8 +3,8 @@ import { ref } from 'vue';
 
 import { useCars } from '@/entities/car';
 import { SearchBar } from '@/features/home';
-import { CarGrid, FilterBar } from '@/widgets/car';
 import { AppLoading } from '@/shared/ui';
+import { CarGrid, FilterBar } from '@/widgets/car';
 
 const { data: cars, isLoading } = useCars();
 
@@ -27,7 +27,7 @@ const closeFilterBar = () => {
   <div class="grid gap-y-10 justify-items-center">
     <SearchBar @open-filter-bar="openFilterBar" />
 
-    <app-loading v-if="isLoading" />
+    <AppLoading v-if="isLoading" />
 
     <CarGrid v-else-if="cars?.data.length" :cars="cars.data" />
 

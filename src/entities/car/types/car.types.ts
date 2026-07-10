@@ -12,7 +12,7 @@ export interface Car {
   media: CarMedia[];
   name: string;
   price: number;
-  rents: unknown[];
+  rents?: unknown[];
   steering: string;
   transmission: string;
 }
@@ -64,4 +64,41 @@ export interface Filters {
   search: string;
   steering: string;
   transmission: string;
+}
+
+export interface rentCarInfo {
+  status: string;
+  pickupLocation: string;
+  returnLocation: string;
+  startDate: string;
+  endDate: string;
+  totalPrice: number;
+  firstName: string;
+  lastName: string;
+  middleName: string;
+  birthDate: string;
+  email: string;
+  phone: string;
+  comment: string;
+  _id: string;
+  created: string;
+  updated: string;
+}
+
+export interface RegistrationRental {
+  approval?: boolean;
+  carId?: string | number;
+  birthDate?: string;
+  carName?: string;
+  comment?: string;
+  email?: string;
+  endDate?: number;
+  startDate?: number;
+  firstName?: string;
+  lastName?: string;
+  middleName?: string;
+  phone?: string;
+  pickupLocation?: string;
+  price?: number;
+  returnLocation?: string;
 }

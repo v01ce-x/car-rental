@@ -3,7 +3,7 @@ import { tv } from 'tailwind-variants';
 export const formVariants = tv({
   slots: {
     field:
-      'flex items-center cursor-pointer gap-x-2 px-3 py-1.5 bg-primary-foreground rounded-full text-foreground border border-input',
+      'flex items-center cursor-pointer gap-x-2 px-3 py-1.5 bg-primary-foreground text-foreground border border-input',
     rangeSlider:
       'absolute top-1/2 -translate-1/2 w-3 h-3 border border-primary bg-surface-foreground rounded-full z-10',
     selectOptions:

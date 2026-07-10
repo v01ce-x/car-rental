@@ -18,7 +18,6 @@ const props = defineProps<Props>();
 const classes = computed(() =>
   descriptionVariants({
     variant: props.variant,
-    sizeTextDescription: props.sizeTextDescription,
     sizeTextLabel: props.sizeTextLabel
   })
 );
@@ -27,6 +26,8 @@ const classes = computed(() =>
 <template>
   <div :class="classes">
     <span class="text-surface">{{ label }}</span>
-    <span class="capitalize">{{ description }}</span>
+    <span class="first-letter:uppercase" :class="descriptionVariants({ sizeTextDescription })">{{
+      description
+    }}</span>
   </div>
 </template>
