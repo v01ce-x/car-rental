@@ -5,8 +5,8 @@ export interface ApiResponse<T> {
 }
 
 export interface ApiResponseRent<T> {
-  success: boolean;
   rent: {
     carInfo: T;
   };
+  success: boolean;
 }

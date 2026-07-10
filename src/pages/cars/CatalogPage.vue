@@ -21,7 +21,9 @@ const closeFilterBar = () => {
 
 <template>
   <div class="sm:hidden mb-4">
-    <h1 class="text-3xl font-bold">Аренда Машин</h1>
+    <h1 class="text-3xl font-bold">
+      Аренда Машин
+    </h1>
   </div>
 
   <div class="grid gap-y-10 justify-items-center">
@@ -36,9 +38,7 @@ const closeFilterBar = () => {
     </div>
 
     <div v-else class="flex justify-center mt-10">
-      <span class="text-2xl text-center"
-        >Возникли проблемы при загрузке данных, пожалуйста, перезагрузите сайт</span
-      >
+      <span class="text-2xl text-center">Возникли проблемы при загрузке данных, пожалуйста, перезагрузите сайт</span>
     </div>
     <teleport to="#screen">
       <FilterBar :is-open-filter="isOpenFilter" @close-filter-bar="closeFilterBar" />

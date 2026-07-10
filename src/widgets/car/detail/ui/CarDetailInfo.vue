@@ -22,7 +22,9 @@ defineProps<Props>();
     </div>
 
     <div>
-      <h2 class="text-2xl font-medium">Характеристики</h2>
+      <h2 class="text-2xl font-medium">
+        Характеристики
+      </h2>
       <div>
         <AppDescription
           label="Марка"
@@ -64,14 +66,18 @@ defineProps<Props>();
 
     <div class="grid gap-y-4 mt-2">
       <div class="flex items-center gap-x-6 justify-between">
-        <h3 class="text-xl sm:text-2xl font-medium">Стоимость</h3>
+        <h3 class="text-xl sm:text-2xl font-medium">
+          Стоимость
+        </h3>
         <b class="font-bold text-xl sm:text-2xl">{{ carDetail.price }} &#8381; за 1 день</b>
       </div>
       <span class="font-medium">Аренда на 14 дней</span>
       <b class="font-bold text-[28px] sm:text-[32px]">Итог: {{ carDetail.price * 14 }} &#8381;</b>
 
       <router-link :to="Routes.carSelection.path">
-        <AppButton variant="primary" class="sm:max-w-80"> Забронировать </AppButton>
+        <AppButton variant="primary" class="sm:max-w-80">
+          Забронировать
+        </AppButton>
       </router-link>
     </div>
   </div>

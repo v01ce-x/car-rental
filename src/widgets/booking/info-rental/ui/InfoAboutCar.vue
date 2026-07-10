@@ -23,7 +23,9 @@ const printAddress = (address: string | undefined): string => address || 'Зап
 
 <template>
   <article class="bg-secondary py-6 px-10 w-full h-fit grid gap-y-4 rounded-3xl">
-    <h3 class="text-[24px] font-bold">Ваше бронирование</h3>
+    <h3 class="text-[24px] font-bold">
+      Ваше бронирование
+    </h3>
     <AppDescription
       :description="registrationRentalStore.rentalData.carName"
       label="Машина"

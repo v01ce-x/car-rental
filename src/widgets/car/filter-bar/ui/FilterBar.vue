@@ -32,7 +32,9 @@ watch(
       <aside :class="root()" @click.stop>
         <div :class="inner()">
           <div :class="header()">
-            <h3 class="text-2xl font-bold">Фильтры</h3>
+            <h3 class="text-2xl font-bold">
+              Фильтры
+            </h3>
             <div class="p-2 cursor-pointer" @click="emit('closeFilterBar')">
               <AppIcon name="cross" class="w-6 h-6" />
             </div>

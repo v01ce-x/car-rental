@@ -25,7 +25,7 @@ const handleClick = () => router.push(Routes.carDetail.path.replace(':id', Strin
 
 <template>
   <article class="flex flex-col gap-y-2">
-    <img :src="imageAdapter(coverImage)" alt="" :class="image()" />
+    <img :src="imageAdapter(coverImage)" alt="" :class="image()">
 
     <div :class="context()">
       <div class="flex flex-col">
@@ -42,6 +42,8 @@ const handleClick = () => router.push(Routes.carDetail.path.replace(':id', Strin
       </div>
     </div>
 
-    <AppButton variant="secondary" @click="handleClick()"> Подробнее </AppButton>
+    <AppButton variant="secondary" @click="handleClick()">
+      Подробнее
+    </AppButton>
   </article>
 </template>

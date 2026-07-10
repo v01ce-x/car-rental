@@ -90,11 +90,15 @@ const onClick = () => {
   <div class="max-w-211 grid gap-y-6">
     <BookingNavigation :links="LINKS" />
 
-    <h2 class="text-[24px] font-bold">Проверка данных</h2>
+    <h2 class="text-[24px] font-bold">
+      Проверка данных
+    </h2>
 
     <ExecutionStep :step="3" />
 
-    <h3 class="text-[24px] font-bold">Ваши заказ</h3>
+    <h3 class="text-[24px] font-bold">
+      Ваши заказ
+    </h3>
 
     <div class="grid md:grid-cols-2 gap-10">
       <InfoActual title="Данные машины" :items="ACTUAL_CAR" :path="Routes.carSelection.path" />
@@ -108,34 +112,36 @@ const onClick = () => {
 
     <div class="hidden md:block bg-secondary w-full h-px rounded-full" />
 
-    <span class="font-medium"
-      >Аренда на
+    <span class="font-medium">Аренда на
       {{
         calculateRentalDays(
           registrationRentalStore.rentalData.startDate,
           registrationRentalStore.rentalData.endDate
         )
       }}
-      дней</span
-    >
+      дней</span>
 
-    <b class="text-[32px] fonr-bold"
-      >Итого:
+    <b class="text-[32px] fonr-bold">Итого:
       {{
         calculateRentalDays(
           registrationRentalStore.rentalData.startDate,
           registrationRentalStore.rentalData.endDate
         ) * registrationRentalStore.rentalData.price
       }}
-      &#8381;</b
-    >
+      &#8381;</b>
 
     <router-link :to="Routes.carSelection.path" class="hidden md:block">
-      <AppButton variant="secondary"> Редактировать данные </AppButton>
+      <AppButton variant="secondary">
+        Редактировать данные
+      </AppButton>
     </router-link>
     <div class="grid md:grid-cols-2 gap-y-6 md:gap-x-4">
-      <AppButton variant="secondary" @click="goBack()"> Назад </AppButton>
-      <AppButton variant="primary" @click="onClick()"> Продолжить </AppButton>
+      <AppButton variant="secondary" @click="goBack()">
+        Назад
+      </AppButton>
+      <AppButton variant="primary" @click="onClick()">
+        Продолжить
+      </AppButton>
     </div>
   </div>
 </template>

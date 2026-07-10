@@ -31,7 +31,9 @@ defineProps<Props>();
     />
     <div class="w-full h-px rounded-full bg-muted" />
     <router-link :to="path">
-      <AppButton class="md:hidden" variant="secondary"> Редактировать данные </AppButton>
+      <AppButton class="md:hidden" variant="secondary">
+        Редактировать данные
+      </AppButton>
     </router-link>
   </div>
 </template>

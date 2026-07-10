@@ -6,7 +6,7 @@ import type { DriverData } from '@/features/booking';
 
 import { useRegistrationRentalStore } from '@/entities/car';
 import { Routes } from '@/shared/lib';
-import { AppButton, FormCheckbox, FormField, FormInput, FormTextarea } from '@/shared/ui';
+import { AppButton, AppIcon, FormCheckbox, FormField, FormInput, FormTextarea } from '@/shared/ui';
 
 const model = defineModel<DriverData>({ required: true });
 
@@ -45,7 +45,12 @@ onMounted(() => {
         <FormInput v-model="model.middleName" placeholder="Иванович" />
       </FormField>
       <FormField label="Дата рождения">
-        <FormInput v-model="model.birthDate" type="date" />
+        <AppIcon name="calendar-days" class="w-4 h-4 text-input" />
+        <FormInput
+          v-model="model.birthDate"
+          type="date"
+          class="[&::-webkit-calendar-picker-indicator]:hidden cursor-pointer"
+        />
       </FormField>
       <FormField label="Телефон">
         <FormInput v-model="model.phone" placeholder="+7" type="tel" />
@@ -60,9 +65,13 @@ onMounted(() => {
     </div>
     <div class="grid grid-cols-2 gap-4 w-full">
       <router-link :to="Routes.carSelection.path">
-        <AppButton variant="secondary"> Назад </AppButton>
+        <AppButton variant="secondary">
+          Назад
+        </AppButton>
       </router-link>
-      <AppButton variant="primary"> Продолжить </AppButton>
+      <AppButton variant="primary">
+        Продолжить
+      </AppButton>
     </div>
   </form>
 </template>

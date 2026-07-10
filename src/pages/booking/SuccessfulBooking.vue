@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import {AppButton, AppDescription, AppIcon} from '@/shared/ui';
 import { useRegistrationRentalStore } from '@/entities/car';
+import { Routes } from '@/shared/lib';
+import { AppButton, AppDescription, AppIcon } from '@/shared/ui';
 import { formatBookingRange } from '@/shared/utils';
-import {Routes} from "@/shared/lib";
 
 const registrationRentalStore = useRegistrationRentalStore();
 const RENTAL_DATA = [
@@ -31,12 +31,14 @@ const RENTAL_DATA = [
 <template>
   <div class="max-w-101 grid gap-y-4 md:mt-8">
     <div class="grid gap-y-4">
-      <app-icon name="success" />
-      <h3 class="text-2xl font-bold">Машина забронирована</h3>
+      <AppIcon name="success" />
+      <h3 class="text-2xl font-bold">
+        Машина забронирована
+      </h3>
     </div>
     <div class="grid gap-y-4">
       <div class="grid gap-y-4">
-        <app-description
+        <AppDescription
           v-for="item of RENTAL_DATA"
           :key="item.label"
           :description="item.description"
@@ -50,10 +52,14 @@ const RENTAL_DATA = [
     </div>
     <div class="grid gap-y-4">
       <router-link to="">
-        <app-button variant="secondary">Посмотреть статус</app-button>
+        <AppButton variant="secondary">
+          Посмотреть статус
+        </AppButton>
       </router-link>
       <router-link :to="Routes.catalog.path">
-        <app-button variant="primary">На главную</app-button>
+        <AppButton variant="primary">
+          На главную
+        </AppButton>
       </router-link>
     </div>
   </div>

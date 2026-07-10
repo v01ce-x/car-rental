@@ -25,7 +25,9 @@ const rentalData = reactive({
     <div class="grid gap-y-6 max-w-176 w-full">
       <BookingNavigation :links="LINKS" />
 
-      <h2 class="text-[24px] font-bold">Бронирование машин</h2>
+      <h2 class="text-[24px] font-bold">
+        Бронирование машин
+      </h2>
 
       <ExecutionStep :step="1" />
 

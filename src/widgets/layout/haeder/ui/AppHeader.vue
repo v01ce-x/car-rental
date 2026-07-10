@@ -1,20 +1,16 @@
 <script setup lang="ts">
-import { NavigationHeader } from '@/features/header';
-import { Routes } from '@/shared/lib';
-import { AppButton, AppIcon, SwitchThemeButton } from '@/shared/ui';
+import { NavigationHeader } from '@/features/header-navigation';
+import { AppButton, AppIcon, AppLogo, SwitchThemeButton } from '@/shared/ui';
 
 import { HeaderVariants } from './header.variants.ts';
 
-const { header, logo, title, button, icon } = HeaderVariants();
+const { header, button, icon } = HeaderVariants();
 </script>
 
 <template>
   <header>
     <div :class="header()">
-      <router-link :to="Routes.catalog.path" :class="logo()">
-        <AppIcon name="logo" class="w-7.5 h-5.5" />
-        <h1 :class="title()">leasing</h1>
-      </router-link>
+      <AppLogo />
 
       <div class="flex items-center gap-x-6">
         <SwitchThemeButton />

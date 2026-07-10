@@ -26,7 +26,9 @@ const print = (value: string | undefined): string => value || 'Заполнит�
 
 <template>
   <article class="hidden lg:grid gap-y-4 h-fit flex-1 bg-secondary rounded-3xl py-6 px-10">
-    <h3 class="text-[24px] font-bold">Ваше бронирование</h3>
+    <h3 class="text-[24px] font-bold">
+      Ваше бронирование
+    </h3>
     <AppDescription
       :description="registrationRentalStore.rentalData.carName"
       label="Машина"

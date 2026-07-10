@@ -67,33 +67,32 @@ export interface Filters {
 }
 
 export interface rentCarInfo {
-  status: string;
-  pickupLocation: string;
-  returnLocation: string;
-  startDate: string;
+  _id: string;
+  birthDate: string;
+  comment: string;
+  created: string;
+  email: string;
   endDate: string;
-  totalPrice: number;
   firstName: string;
   lastName: string;
   middleName: string;
-  birthDate: string;
-  email: string;
   phone: string;
-  comment: string;
-  _id: string;
-  created: string;
+  pickupLocation: string;
+  returnLocation: string;
+  startDate: string;
+  status: string;
+  totalPrice: number;
   updated: string;
 }
 
 export interface RegistrationRental {
   approval?: boolean;
-  carId?: string | number;
   birthDate?: string;
+  carId?: number | string;
   carName?: string;
   comment?: string;
   email?: string;
-  endDate?: number;
-  startDate?: number;
+  endDate?: number | string;
   firstName?: string;
   lastName?: string;
   middleName?: string;
@@ -101,4 +100,5 @@ export interface RegistrationRental {
   pickupLocation?: string;
   price?: number;
   returnLocation?: string;
+  startDate?: number | string;
 }

@@ -68,7 +68,7 @@ const closeImage = () => {
             :src="imageAdapter(image.url)"
             alt="Фото машины"
             class="w-full h-full object-cover select-none cursor-pointer"
-          />
+          >
         </div>
         <teleport to="#screen">
           <transition name="image">
@@ -82,7 +82,7 @@ const closeImage = () => {
                   :src="imageAdapter(imagesSlider[currentIndex].url)"
                   alt="Машина"
                   class="w-full max-h-175 rounded-4xl"
-                />
+                >
                 <AppIcon
                   name="cross"
                   class="w-6 h-6 cursor-pointer text-black absolute top-5 right-5"
@@ -116,7 +116,7 @@ const closeImage = () => {
           :src="imageAdapter(image.url)"
           alt="Миниатюра"
           class="w-full h-full object-cover select-none"
-        />
+        >
       </button>
     </div>
   </div>

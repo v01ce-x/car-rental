@@ -1,4 +1,4 @@
-import type { Car, Filters, RegistrationRental, rentCarInfo } from '@/entities/car/types';
+import type { Car, Filters, RegistrationRental, rentCarInfo } from '@/entities/car';
 import type { ApiResponse, ApiResponseRent } from '@/shared/api';
 
 import { api } from '@/shared/api';

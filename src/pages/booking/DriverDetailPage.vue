@@ -34,7 +34,9 @@ const driverData = reactive({
     <div class="md:max-w-176 w-full grid gap-y-6">
       <BookingNavigation :links="LINKS" />
 
-      <h2 class="text-[24px] font-bold">Ваши данные</h2>
+      <h2 class="text-[24px] font-bold">
+        Ваши данные
+      </h2>
 
       <ExecutionStep :step="2" />
 

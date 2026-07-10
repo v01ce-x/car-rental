@@ -25,7 +25,7 @@ const [startDate, startDateAttrs] = defineField('startDate');
 const [endDate, endDateAttrs] = defineField('endDate');
 const [search, searchAttrs] = defineField('search');
 
-const { rent, buttons } = SearchBarVariants();
+const { root, rent, buttons, calendar, filter } = SearchBarVariants();
 
 const handleClick = () => {
   carFiltersStore.setFilters({
@@ -56,29 +56,16 @@ watch([() => startDate.value, () => endDate.value], ([newStart, newEnd]) => {
 </script>
 
 <template>
-  <form
-    class="max-w-143.5 xl:max-w-full w-full flex flex-col xl:flex-row gap-3 items-center justify-between"
-    @submit.prevent="handleClick"
-  >
+  <form :class="root()" @submit.prevent="handleClick">
     <div :class="rent()">
       <FormField label="Начало аренды" class="w-full sm:w-69.5">
         <AppIcon name="calendar-days" class="w-4 h-4 text-input" />
-        <FormInput
-          v-model="startDate"
-          v-bind="startDateAttrs"
-          type="date"
-          class="[&::-webkit-calendar-picker-indicator]:hidden cursor-pointer"
-        />
+        <FormInput v-model="startDate" v-bind="startDateAttrs" type="date" :class="calendar()" />
       </FormField>
 
       <FormField label="Окончание аренды" class="w-full sm:w-69.5">
         <AppIcon name="calendar-days" class="w-4 h-4 text-input" />
-        <FormInput
-          v-model="endDate"
-          v-bind="endDateAttrs"
-          type="date"
-          class="[&::-webkit-calendar-picker-indicator]:hidden cursor-pointer"
-        />
+        <FormInput v-model="endDate" v-bind="endDateAttrs" type="date" :class="calendar()" />
       </FormField>
     </div>
 
@@ -88,11 +75,10 @@ watch([() => startDate.value, () => endDate.value], ([newStart, newEnd]) => {
     </FormField>
 
     <div :class="buttons()">
-      <AppButton variant="primary" class="w-full xl:w-auto"> Найти машину </AppButton>
-      <div
-        class="p-4 bg-secondary hover:bg-secondary-hover duration-300 cursor-pointer rounded-full"
-        @click="() => emit('openFilterBar')"
-      >
+      <AppButton variant="primary" class="w-full xl:w-auto">
+        Найти машину
+      </AppButton>
+      <div :class="filter()" @click="() => emit('openFilterBar')">
         <AppIcon name="list-filter" class="w-5 h-5" />
       </div>
     </div>

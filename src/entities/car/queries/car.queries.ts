@@ -3,9 +3,9 @@ import { computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
 import { carService, useCarFiltersStore, useRegistrationRentalStore } from '@/entities/car';
+import { Routes } from '@/shared/lib';
 
 import { CAR_QUERY_KEYS } from './car.keys.ts';
-import { Routes } from '@/shared/lib';
 
 export const useCars = defineQuery(() => {
   const carFiltersStore = useCarFiltersStore();
@@ -44,9 +44,6 @@ export const useRentCar = defineMutation(() => {
     },
     onSuccess: () => {
       router.push(Routes.successfulBooking.path);
-    },
-    onError: (err) => {
-      console.log(err);
     }
   });
 });

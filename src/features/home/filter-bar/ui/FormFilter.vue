@@ -6,10 +6,12 @@ import type { Filters, MockFilters } from '@/entities/car';
 import { useCarFiltersStore } from '@/entities/car';
 import { AppButton, FormColor, FormPrice, FormSegment, FormSelect } from '@/shared/ui';
 
+import FormFilterVariants from './form-filter.variants.ts';
+
 const emit = defineEmits<{
   (e: 'closeFilterBar'): void;
 }>();
-const carFiltersStore = useCarFiltersStore();
+
 const FILTER_DATA: MockFilters = {
   brands: [
     {
@@ -135,6 +137,9 @@ const FILTER_DATA: MockFilters = {
   ]
 };
 
+const carFiltersStore = useCarFiltersStore();
+const { root, buttons } = FormFilterVariants();
+
 const filters: Omit<Filters, 'search'> = reactive({
   brand: '',
   bodyType: '',
@@ -162,10 +167,7 @@ const resetForm = () => {
 </script>
 
 <template>
-  <form
-    class="flex flex-col flex-1 gap-y-5 justify-between h-full overflow-y-auto overflow-x-hidden p-2"
-    @submit.prevent="handleClick"
-  >
+  <form :class="root()" @submit.prevent="handleClick">
     <div class="grid gap-y-6">
       <FormSelect
         v-model="filters.brand"
@@ -199,9 +201,13 @@ const resetForm = () => {
       <FormColor v-model="filters.color" :colors="FILTER_DATA.colors" />
     </div>
 
-    <div class="flex flex-col sm:flex-row gap-4 w-full">
-      <AppButton variant="secondary" @click="resetForm()"> Сбросить фильтры </AppButton>
-      <AppButton variant="primary"> Найти </AppButton>
+    <div :class="buttons()">
+      <AppButton variant="secondary" @click="resetForm()">
+        Сбросить фильтры
+      </AppButton>
+      <AppButton variant="primary">
+        Найти
+      </AppButton>
     </div>
   </form>
 </template>

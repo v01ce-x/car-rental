@@ -6,7 +6,7 @@ import type { RentalData } from '@/features/booking';
 
 import { useRegistrationRentalStore } from '@/entities/car';
 import { Routes } from '@/shared/lib';
-import { AppButton, FormField, FormInput } from '@/shared/ui';
+import { AppButton, AppIcon, FormField, FormInput } from '@/shared/ui';
 import { adjustBookingDates } from '@/shared/utils';
 
 const model = defineModel<RentalData>({ required: true });
@@ -59,11 +59,21 @@ watch([() => model.value?.startDate, () => model.value?.endDate], ([newStart, ne
   <form class="grid gap-y-6" @submit.prevent="handleClick()">
     <div class="md:max-w-86 grid gap-y-6">
       <FormField label="Начало аренды">
-        <FormInput v-model="model.startDate" type="date" />
+        <AppIcon name="calendar-days" class="w-4 h-4 text-input" />
+        <FormInput
+          v-model="model.startDate"
+          type="date"
+          class="[&::-webkit-calendar-picker-indicator]:hidden cursor-pointer"
+        />
       </FormField>
 
       <FormField label="Конец аренды">
-        <FormInput v-model="model.endDate" type="date" />
+        <AppIcon name="calendar-days" class="w-4 h-4 text-input" />
+        <FormInput
+          v-model="model.endDate"
+          type="date"
+          class="[&::-webkit-calendar-picker-indicator]:hidden cursor-pointer"
+        />
       </FormField>
 
       <FormField label="Место получения">
@@ -76,8 +86,12 @@ watch([() => model.value?.startDate, () => model.value?.endDate], ([newStart, ne
     </div>
 
     <div class="grid md:grid-cols-2 gap-4">
-      <AppButton variant="secondary" @click="goBack()"> Назад </AppButton>
-      <AppButton variant="primary"> Продолжить </AppButton>
+      <AppButton variant="secondary" @click="goBack()">
+        Назад
+      </AppButton>
+      <AppButton variant="primary">
+        Продолжить
+      </AppButton>
     </div>
   </form>
 </template>

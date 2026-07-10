@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import { reactive } from 'vue';
+
 import type { RegistrationRental } from '@/entities/car';
 
 export const useRegistrationRentalStore = defineStore('registrationRentalStore', () => {
