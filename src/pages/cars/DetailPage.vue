@@ -3,10 +3,10 @@ import { onMounted, watch } from 'vue';
 
 import { useCarDetail, useRegistrationRentalStore } from '@/entities/car';
 import { Routes } from '@/shared/lib';
-import { AppIcon } from '@/shared/ui';
+import {AppIcon, AppLoading} from '@/shared/ui';
 import { CarDetailInfo, CarDetailPreview } from '@/widgets/car';
 
-const { data: carDetail } = useCarDetail();
+const { data: carDetail, isLoading } = useCarDetail();
 const registrationRentalStore = useRegistrationRentalStore();
 
 onMounted(async () => {
@@ -44,6 +44,10 @@ onMounted(async () => {
     <CarDetailInfo :car-detail="carDetail" class="order-1 lg:order-0" />
 
     <CarDetailPreview :media="carDetail.media" :name="carDetail.name" class="order-0 lg:order-1" />
+  </div>
+
+  <div v-else-if="isLoading">
+    <AppLoading />
   </div>
 </template>
 

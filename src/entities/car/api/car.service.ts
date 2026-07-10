@@ -4,7 +4,7 @@ import type { ApiResponse, ApiResponseRent } from '@/shared/api';
 import { api } from '@/shared/api';
 
 export const carService = {
-  cars: (filters?: Partial<Filters>) =>
+  cars: (filters?: Partial<Filters> & { page?: number }) =>
     api
       .get<ApiResponse<Car[]>>('cars/info', {
         params: filters

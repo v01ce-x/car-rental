@@ -1,4 +1,4 @@
-import { defineMutation, defineQuery, useMutation, useQuery } from '@pinia/colada';
+import { defineMutation, defineQuery, useInfiniteQuery, useMutation, useQuery } from '@pinia/colada';
 import { computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
@@ -10,11 +10,25 @@ import { CAR_QUERY_KEYS } from './car.keys.ts';
 export const useCars = defineQuery(() => {
   const carFiltersStore = useCarFiltersStore();
 
-  return useQuery({
+  const queryResult = useInfiniteQuery({
     key: () => CAR_QUERY_KEYS.byFilters(carFiltersStore.getActiveFilters()),
+    query: ({ pageParam }) => carService.cars({
+      ...carFiltersStore.getActiveFilters(),
+      page: pageParam,
+    }),
 
-    query: () => carService.cars(carFiltersStore.getActiveFilters())
+    initialPageParam: 1,
+
+    getNextPageParam: (lastPage, allPages) => {
+      if (!lastPage || lastPage.data.length < 10) return undefined;
+
+      return allPages.length + 1;
+    },
   });
+
+  return {
+    ...queryResult
+  };
 });
 
 export const useCarDetail = () => {
@@ -22,7 +36,7 @@ export const useCarDetail = () => {
   const carId = computed(() => route.params.id);
 
   return useQuery({
-    key: CAR_QUERY_KEYS.carDetail(+carId.value),
+    key: () => CAR_QUERY_KEYS.carDetail(+carId.value),
     query: () => carService.carDetail(+carId.value)
   });
 };

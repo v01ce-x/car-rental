@@ -1,14 +1,17 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-
-import { useCars } from '@/entities/car';
+import { ref, watch } from 'vue';
+import { type Car, useCars } from '@/entities/car';
 import { SearchBar } from '@/features/home';
 import { AppLoading } from '@/shared/ui';
 import { CarGrid, FilterBar } from '@/widgets/car';
+import { useInfiniteScroll } from "@vueuse/core";
 
-const { data: cars, isLoading } = useCars();
+const allProducts = ref<Car[]>([]);
 
+const bottomMarkerRef = ref<HTMLElement | null>(null);
 const isOpenFilter = ref(false);
+
+const { data: newCars, isLoading, loadNextPage, hasNextPage, status } = useCars();
 
 const openFilterBar = () => {
   isOpenFilter.value = !isOpenFilter.value;
@@ -17,6 +20,21 @@ const openFilterBar = () => {
 const closeFilterBar = () => {
   isOpenFilter.value = false;
 };
+
+watch(() => newCars.value?.pages, (pages) => {
+  if (!pages) return;
+  allProducts.value = pages.flatMap(page => page.data);
+}, { immediate: true });
+
+useInfiniteScroll(
+    window,
+    () => {
+      if (status.value !== 'pending' && hasNextPage.value) {
+        loadNextPage();
+      }
+    },
+    { distance: 80 }
+);
 </script>
 
 <template>
@@ -31,15 +49,23 @@ const closeFilterBar = () => {
 
     <AppLoading v-if="isLoading" />
 
-    <CarGrid v-else-if="cars?.data.length" :cars="cars.data" />
+    <CarGrid
+        v-else-if="allProducts.length"
+        :cars="allProducts"
+    />
 
-    <div v-else-if="cars?.success" class="flex justify-center mt-10">
+    <div v-else-if="newCars?.pages" class="flex justify-center mt-10">
       <span class="text-2xl text-center">По вашему запросу ничего не найдено</span>
     </div>
 
     <div v-else class="flex justify-center mt-10">
       <span class="text-2xl text-center">Возникли проблемы при загрузке данных, пожалуйста, перезагрузите сайт</span>
     </div>
+
+    <div ref="bottomMarkerRef" class="w-full h-10 flex justify-center items-center text-gray-400">
+      <span v-if="status === 'pending'">Загрузка новых машин...</span>
+    </div>
+
     <teleport to="#screen">
       <FilterBar :is-open-filter="isOpenFilter" @close-filter-bar="closeFilterBar" />
     </teleport>
