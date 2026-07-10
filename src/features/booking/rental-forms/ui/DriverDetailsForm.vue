@@ -14,10 +14,12 @@ const router = useRouter();
 const registrationRentalStore = useRegistrationRentalStore();
 
 const handleClick = () => {
-  if (!model.value.approval && !Object.values(model.value).every((value) => !!value)) return;
-
-  registrationRentalStore.setData(model.value);
-  router.push(Routes.bookingSummary.path);
+  if (!model.value.approval && !Object.values(model.value).every((value) => !!value)) {
+    return;
+  } else {
+    registrationRentalStore.setData(model.value);
+    router.push(Routes.bookingSummary.path);
+  }
 };
 
 onMounted(() => {
