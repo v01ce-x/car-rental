@@ -1,15 +1,11 @@
-import { globalIgnores } from "eslint/config";
-import { defineConfigWithVueTs, vueTsConfigs } from "@vue/eslint-config-typescript";
-import pluginVue from "eslint-plugin-vue";
+import {eslint} from '@siberiacancode/eslint';
 
-export default defineConfigWithVueTs(
-    {
-      name: "app/files-to-lint",
-      files: ["**/*.{vue,ts,mts,tsx}"],
-    },
-
-    globalIgnores(["**/dist/**", "**/dist-ssr/**", "**/coverage/**"]),
-
-    ...pluginVue.configs["flat/recommended"],
-    vueTsConfigs.recommended,
-);
+export default eslint({
+  typescript: true,
+  vue: true,
+  ignores: [
+    'dist',
+    'node_modules',
+    'coverage',
+  ],
+});

@@ -1,0 +1,50 @@
+<script setup lang="ts">
+import { onMounted, watch } from 'vue';
+
+import { useCarDetail, useRegistrationRentalStore } from '@/entities/car';
+import { Routes } from '@/shared/lib';
+import { AppIcon } from '@/shared/ui';
+import { CarDetailInfo, CarDetailPreview } from '@/widgets/car';
+
+const { data: carDetail } = useCarDetail();
+const registrationRentalStore = useRegistrationRentalStore();
+
+onMounted(async () => {
+  if (carDetail.value?.name) {
+    registrationRentalStore.setData({
+      carName: carDetail.value.name,
+      price: carDetail.value.price,
+      carId: carDetail.value.id
+    });
+  } else {
+    watch(
+      carDetail,
+      () => {
+        registrationRentalStore.setData({
+          carName: carDetail.value?.name,
+          price: carDetail.value?.price,
+          carId: carDetail.value?.id
+        });
+      },
+      {
+        deep: true
+      }
+    );
+  }
+});
+</script>
+
+<template>
+  <router-link :to="Routes.catalog" class="sm:hidden group flex gap-x-3 items-center mb-4">
+    <AppIcon name="arrow" class="group-hover:-translate-x-1 duration-300 w-5 h-5 rotate-90" />
+    <span class="text-xl font-bold">К списку машин</span>
+  </router-link>
+
+  <div v-if="carDetail" class="grid lg:grid-cols-2 gap-10 items-start">
+    <CarDetailInfo :car-detail="carDetail" class="order-1 lg:order-0" />
+
+    <CarDetailPreview :media="carDetail.media" :name="carDetail.name" class="order-0 lg:order-1" />
+  </div>
+</template>
+
+<style scoped></style>

@@ -3,18 +3,18 @@ import { formVariants } from './form.variants.ts';
 
 interface Props {
   label?: string;
-  isDate?: boolean;
+  textarea?: boolean;
 }
 
 defineProps<Props>();
 
-const { input } = formVariants();
+const { field } = formVariants();
 </script>
 
 <template>
   <div class="flex flex-col gap-y-1">
-    <label class="text-[14px] capitalize">{{ label }}</label>
-    <div :class="!isDate ? input() : ''">
+    <label class="text-[14px]">{{ label }}</label>
+    <div :class="[field(), textarea ? 'rounded-xl' : 'rounded-full']">
       <slot />
     </div>
   </div>

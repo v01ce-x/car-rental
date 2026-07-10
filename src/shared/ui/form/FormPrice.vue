@@ -1,20 +1,54 @@
 <script setup lang="ts">
+import { reactive, watch } from 'vue';
+
+import type { Filters, Price } from '@/entities/car';
+
 import { FormField, FormInput, FormRange } from '@/shared/ui';
+
+const MIN_LIMIT = 0;
+const MAX_LIMIT = 10000;
+
+const price = reactive<Price>({
+  minPrice: 0,
+  maxPrice: 10000
+});
+
+const model = defineModel<Pick<Filters, 'maxPrice' | 'minPrice'>>();
+
+watch(
+  price,
+  () => {
+    if (!model.value) return;
+
+    if (price.minPrice === '' || price.minPrice < MIN_LIMIT) price.minPrice = MIN_LIMIT;
+    if (price.minPrice > MAX_LIMIT) price.minPrice = MAX_LIMIT;
+    if (price.maxPrice === '' || price.maxPrice < MIN_LIMIT) price.maxPrice = MIN_LIMIT;
+    if (price.maxPrice > MAX_LIMIT) price.maxPrice = MAX_LIMIT;
+
+    model.value.minPrice = price.minPrice;
+    model.value.maxPrice = price.maxPrice;
+  },
+  {
+    deep: true
+  }
+);
 </script>
 
 <template>
   <div class="grid gap-y-4">
-    <h4 class="text-[18px] text-foreground">Стоимость</h4>
+    <h4 class="text-[18px] text-foreground">
+      Стоимость
+    </h4>
 
     <div class="flex gap-x-4">
-      <form-field label="от" class="max-w-51.5">
-        <form-input placeholder="0 руб" />
-      </form-field>
-      <form-field label="до" class="max-w-51.5">
-        <form-input placeholder="100 000 руб" />
-      </form-field>
+      <FormField label="От" class="max-w-51.5">
+        <FormInput v-model="price.minPrice" type="number" />
+      </FormField>
+      <FormField label="До" class="max-w-51.5">
+        <FormInput v-model="price.maxPrice" type="number" />
+      </FormField>
     </div>
 
-    <form-range />
+    <FormRange v-model="price" />
   </div>
 </template>

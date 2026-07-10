@@ -1,40 +1,85 @@
 <script setup lang="ts">
-import { AppButton, AppIcon, FormCalendar, FormField, FormInput } from '@/shared/ui';
-import '@vuepic/vue-datepicker/dist/main.css';
-import { ref } from 'vue';
-import SearchBarVariants from '../lib/search-bar.variants.ts';
+import { useForm } from 'vee-validate';
+import { onMounted, watch } from 'vue';
 
-const startDate = ref<number>(Date.now());
-const endDate = ref<number>(Date.now());
+import { useCarFiltersStore, useRegistrationRentalStore } from '@/entities/car';
+import { AppButton, AppIcon, FormField, FormInput } from '@/shared/ui';
+import { adjustBookingDates } from '@/shared/utils';
 
-const { dateSearch, center } = SearchBarVariants();
+import type { SearchBarValues } from '../lib/validation.ts';
+
+import { searchBarSchema } from '../lib/validation.ts';
+import SearchBarVariants from './search-bar.variants.ts';
 
 const emit = defineEmits<{
-  (e: 'switchFlag'): void;
+  (e: 'openFilterBar'): void;
 }>();
+
+const { defineField } = useForm<SearchBarValues>({
+  validationSchema: searchBarSchema
+});
+const carFiltersStore = useCarFiltersStore();
+const registrationRentalStore = useRegistrationRentalStore();
+
+const [startDate, startDateAttrs] = defineField('startDate');
+const [endDate, endDateAttrs] = defineField('endDate');
+const [search, searchAttrs] = defineField('search');
+
+const { root, rent, buttons, calendar, filter } = SearchBarVariants();
+
+const handleClick = () => {
+  carFiltersStore.setFilters({
+    search: search.value || ''
+  });
+};
+
+onMounted(() => {
+  startDate.value = registrationRentalStore.rentalData.startDate;
+  endDate.value = registrationRentalStore.rentalData.endDate;
+});
+
+watch([() => startDate.value, () => endDate.value], ([newStart, newEnd]) => {
+  if (!newStart || !newEnd) return;
+
+  const adjusted = adjustBookingDates(newStart, newEnd);
+
+  if (adjusted.endDate !== newEnd) {
+    endDate.value = adjusted.endDate ?? '';
+  }
+  if (adjusted.startDate !== newStart) {
+    startDate.value = adjusted.startDate ?? '';
+  }
+
+  registrationRentalStore.rentalData.startDate = startDate.value;
+  registrationRentalStore.rentalData.endDate = endDate.value;
+});
 </script>
 
 <template>
-  <form class="flex items-center justify-between">
-    <div :class="center()">
-      <form-field label="Начало аренды" is-date>
-        <form-calendar v-model="startDate" :class="dateSearch()" />
-      </form-field>
+  <form :class="root()" @submit.prevent="handleClick">
+    <div :class="rent()">
+      <FormField label="Начало аренды" class="w-full sm:w-69.5">
+        <AppIcon name="calendar-days" class="w-4 h-4 text-input" />
+        <FormInput v-model="startDate" v-bind="startDateAttrs" type="date" :class="calendar()" />
+      </FormField>
 
-      <form-field label="Окончание аренды" is-date>
-        <form-calendar v-model="endDate" :class="dateSearch()" />
-      </form-field>
+      <FormField label="Окончание аренды" class="w-full sm:w-69.5">
+        <AppIcon name="calendar-days" class="w-4 h-4 text-input" />
+        <FormInput v-model="endDate" v-bind="endDateAttrs" type="date" :class="calendar()" />
+      </FormField>
     </div>
 
-    <form-field label="Поиск" class="max-w-80">
-      <app-icon name="search" class="w-4 h-4" />
-      <form-input placeholder="Модель машины" />
-    </form-field>
+    <FormField label="Поиск" class="xl:max-w-80 w-full">
+      <AppIcon name="search" class="w-4 h-4 text-input" />
+      <FormInput v-model="search" v-bind="searchAttrs" placeholder="Марка машины" />
+    </FormField>
 
-    <div :class="center()">
-      <app-button variant="primary">Найти машину</app-button>
-      <div class="p-4 cursor-pointer" @click="() => emit('switchFlag')">
-        <app-icon name="list-filter" class="w-5 h-5" />
+    <div :class="buttons()">
+      <AppButton variant="primary" class="w-full xl:w-auto">
+        Найти машину
+      </AppButton>
+      <div :class="filter()" @click="() => emit('openFilterBar')">
+        <AppIcon name="list-filter" class="w-5 h-5" />
       </div>
     </div>
   </form>

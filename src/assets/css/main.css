@@ -1,22 +1,31 @@
 @import './fonts.css';
 @import 'tailwindcss';
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   /* background */
-  --color-button-primary: #0b0b0b;
-  --color-button-secondary: #f5f5f5;
+  --color-background: #fbfbfb;
+  --color-primary: #0b0b0b;
+  --color-surface-foreground: #f5f5f5;
+  --color-surface-foreground-hover: #cecece;
+  --color-secondary-foreground: #0b0b0b;
   --color-muted: #f3f3f3;
+  --color-segment: #f3f3f3;
 
   /* Border color */
   --color-hard: #0b0b0b;
   --color-input: #b7b7b7;
+  --color-ring: #ebebeb;
 
   /* Text color */
   --color-primary-foreground: #fbfbfb;
   --color-foreground: #0b0b0b;
-  --color-secondary-foreground: #0b0b0b;
+  --color-primary-hover: #2e2e2e;
+  --color-secondary: #f5f5f5;
+  --color-secondary-hover: #f3f3f3;
   --color-surface: #969696;
-  --color-secondary: #969696;
+  --color-muted-foreground: #b7b7b7;
 
   /* Blue scale */
   --blue-600: #2563eb;
@@ -25,13 +34,51 @@
 
   /* Fonts */
   --font-sans: 'Nunito', sans-serif;
+
+  --animate-loading: loading 2s ease-in-out infinite;
+
+  @keyframes loading {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 }
 
-html {
-  font-family: var(--font-sans), serif !important;
+body {
+  font-family: var(--font-sans), serif;
+  background-color: var(--color-background);
+  color: var(--color-primary);
+  transition: 0.5s ease;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
-input {
+#app {
+  min-height: 100vh;
+}
+
+input,
+textarea {
   outline: none;
   border: none;
+}
+
+.dark {
+  --color-primary: #fbfbfb;
+  --color-primary-hover: #afafaf;
+  --color-background: #0b0b0b;
+  --color-hard: #969696;
+  --color-surface-foreground: #2e2e2e;
+  --color-primary-foreground: #0b0b0b;
+  --color-secondary-foreground: #f3f3f3;
+  --color-foreground: #fbfbfb;
+  --color-muted: #0b0b0b;
+  --color-segment: #2e2e2e;
+  --color-surface-foreground-hover: #727272;
+  --color-secondary: #2e2e2e;
+  --color-secondary-hover: #727272;
 }

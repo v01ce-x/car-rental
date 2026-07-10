@@ -1,32 +1,69 @@
-<script setup lang="ts">
+<script setup lang="ts" generic="T extends { id: number }">
+import { onClickOutside } from '@vueuse/core';
 import { ref } from 'vue';
+
 import { AppIcon } from '@/shared/ui';
+import { translations } from '@/shared/utils';
+
+import { formVariants } from './form.variants.ts';
 
 interface Props {
   label: string;
+  options: T[];
   placeholder: string;
+  getOption: (item: T) => string;
 }
 
 defineProps<Props>();
 
-const selectElement = ref<HTMLSelectElement | null>(null);
+const model = defineModel<string>({
+  default: ''
+});
+
+const { selectOptions, selectTrigger, option } = formVariants();
+
+const selectElement = ref<HTMLElement | null>(null);
 const isOpen = ref(false);
+
+const handleClick = (value: string) => {
+  model.value = value;
+  isOpen.value = false;
+};
+
+onClickOutside(selectElement, () => {
+  isOpen.value = false;
+});
 </script>
 
 <template>
-  <div ref="selectElement" class="relative flex flex-col gap-y-1" @click="isOpen = !isOpen">
-    <h4 class="capitalize text-[14px] font-medium">{{ label }}</h4>
+  <div ref="selectElement" class="relative flex flex-col gap-y-1">
+    <h4 class="capitalize text-[14px] font-medium">
+      {{ label }}
+    </h4>
     <div
-      class="flex justify-between items-center px-3 py-3.5 rounded-full border border-input text-input cursor-pointer capitalize"
+      :class="[selectTrigger(), model ? 'text-primary' : 'text-input']"
+      @click="isOpen = !isOpen"
     >
-      <span>{{ placeholder }}</span>
+      <span>{{ translations[model] ?? model ?? placeholder }}</span>
       <div class="p-1">
-        <app-icon name="arrow" class="w-5 h-5" />
+        <AppIcon name="arrow" class="w-5 h-5" />
       </div>
     </div>
 
     <transition name="select-dropdown">
-      <div class="" v-if="isOpen"></div>
+      <div v-if="isOpen" :class="selectOptions()">
+        <div
+          v-for="item of options"
+          :key="item.id"
+          :class="[
+            option(),
+            getOption(item) === model ? 'border-primary text-primary' : 'border-input text-input'
+          ]"
+          @click="handleClick(getOption(item))"
+        >
+          {{ getOption(item) in translations ? translations[getOption(item)] : getOption(item) }}
+        </div>
+      </div>
     </transition>
   </div>
 </template>

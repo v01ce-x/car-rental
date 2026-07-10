@@ -2,7 +2,7 @@
 import CircleButtonVariants from './button.variants.ts';
 
 interface Props {
-  type: 'arrow' | 'link' | 'filter';
+  type: 'arrow' | 'filter' | 'link';
 }
 
 defineProps<Props>();

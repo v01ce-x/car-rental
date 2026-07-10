@@ -6,9 +6,16 @@ interface Props {
 
 defineProps<Props>();
 
-const model = defineModel<string>({ default: '' });
+const model = defineModel();
 </script>
 
 <template>
-  <input :type="type" v-model="model" :placeholder="placeholder" class="placeholder-input" />
+  <input
+    v-model="model"
+    :value="model"
+    :type="type"
+    :placeholder="placeholder"
+    onclick="type === 'date' ? this.showPicker() : ''"
+    class="placeholder-input text-primary w-full"
+  >
 </template>

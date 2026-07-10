@@ -1,7 +1,7 @@
 import { tv } from 'tailwind-variants';
 
 export const CircleButtonVariants = tv({
-  base: 'rounded-full cursor-pointer bg-button-secondary',
+  base: 'rounded-full cursor-pointer bg-surface-foreground hover:bg-surface-foreground-hover duration-300',
   variants: {
     variant: {
       arrow: 'p-1.5',
